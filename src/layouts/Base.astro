@@ -1,0 +1,110 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { site, seo, faq, services } from '../content/site';
+
+const { region } = site;
+const state = { '@type': 'State', name: 'Rio de Janeiro', identifier: `BR-${region.state}` }; // ajuste se mudar de estado
+
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(seo.ogImage, site.url).href;
+
+
+/* Dados estruturados: negócio local (presencial na região, online no Brasil) + serviços + perguntas frequentes */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}/#negocio`,
+      name: site.name,
+      description: seo.description,
+      url: site.url,
+      image: ogImage,
+      logo: `${site.url}/logo.svg`,
+      telephone: `+${site.whatsapp}`,
+      email: site.email,
+      currenciesAccepted: 'BRL',
+      paymentAccepted: 'Pix, Boleto, Cartão de crédito',
+      // Negócio de área de atendimento (sem endereço público): presencial na região, online no país
+      address: { '@type': 'PostalAddress', addressRegion: region.state, addressCountry: 'BR' },
+      areaServed: [
+        ...region.cities.map((name) => ({ '@type': 'City', name, containedInPlace: state })),
+        { '@type': 'AdministrativeArea', name: region.name, containedInPlace: state },
+        { '@type': 'Country', name: site.country, identifier: 'BR' },
+      ],
+      availableChannel: {
+        '@type': 'ServiceChannel',
+        name: 'Atendimento online',
+        serviceUrl: site.url,
+        availableLanguage: 'pt-BR',
+      },
+      founder: { '@type': 'Person', name: site.owner, jobTitle: site.role },
+      knowsLanguage: 'pt-BR',
+      sameAs: site.social.map((s) => s.href),
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Sites e apps',
+        itemListElement: services.items.map((s) => ({
+          '@type': 'Offer',
+          itemOffered: { '@type': 'Service', name: s.name, description: s.desc },
+        })),
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#site`,
+      url: site.url,
+      name: site.name,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': `${site.url}/#negocio` },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faq.items.map((item) => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seo.title}</title>
+    <meta name="description" content={seo.description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#f5f4ef" />
+    <meta name="geo.region" content={`BR-${region.state}`} />
+    <meta name="geo.placename" content={region.cities.join(', ')} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/fustat.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <slot />
+    <script>
+      import '../scripts/reveal';
+    </script>
+  </body>
+</html>

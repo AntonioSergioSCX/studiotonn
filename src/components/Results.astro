@@ -1,0 +1,179 @@
+---
+import SectionHead from './ui/SectionHead.astro';
+import Icon from './ui/Icon.astro';
+import { results } from '../content/site';
+---
+
+<section class="section results" id="resultados" aria-labelledby="resultados-title">
+  <div class="container">
+    <SectionHead index="001" eyebrow={results.eyebrow} title={results.title} lead={results.lead} id="resultados-title" />
+
+    <ul class="results__grid snap-mobile" role="list" aria-label="Resultados">
+      {results.items.map((item, i) => (
+        <li class:list={['card', `card--${item.id}`]} data-reveal style={`--i:${i}`}>
+          <div class="card__art" aria-hidden="true">
+            {item.id === 'google' && (
+              <div class="art-map">
+                <span class="art-map__road art-map__road--h"></span>
+                <span class="art-map__road art-map__road--v"></span>
+                <span class="art-map__dot" style="--x:18%;--y:28%"></span>
+                <span class="art-map__dot" style="--x:74%;--y:70%"></span>
+                <span class="art-map__dot" style="--x:30%;--y:78%"></span>
+                <span class="art-map__pin"><Icon name="pin" size={22} /></span>
+                <span class="art-map__label"><b>Seu negócio</b> · 800 m de você</span>
+              </div>
+            )}
+            {item.id === 'whatsapp' && (
+              <div class="art-chat">
+                <span class="bubble bubble--in">Oi! Vocês atendem sábado?</span>
+                <span class="bubble bubble--out">Atendemos sim, das 8h às 14h 🙂</span>
+                <span class="bubble bubble--in">Perfeito, quero agendar!</span>
+              </div>
+            )}
+            {item.id === 'trust' && (
+              <div class="art-speed">
+                <span class="art-speed__value">0,9<small>s</small></span>
+                <span class="art-speed__bar"><span></span></span>
+                <span class="art-speed__stars">
+                  <Icon name="star" size={16} /><Icon name="star" size={16} /><Icon name="star" size={16} /><Icon name="star" size={16} /><Icon name="star" size={16} />
+                </span>
+              </div>
+            )}
+          </div>
+          <h3 class="card__title">{item.title}</h3>
+          <p class="card__text">{item.text}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .results__grid {
+    display: grid;
+    gap: 16px;
+  }
+  @media (min-width: 860px) {
+    .results__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 28px;
+    border-radius: var(--r-lg);
+    background: var(--c-surface);
+    box-shadow: inset 0 0 0 1px var(--c-line);
+    transition: transform var(--d-med) var(--ease-out), box-shadow var(--d-med) var(--ease-out);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--c-line), var(--shadow-2); }
+  .card__art {
+    position: relative;
+    height: 220px;
+    margin-bottom: 24px;
+    border-radius: calc(var(--r-lg) - 10px);
+    background: var(--c-bg);
+    overflow: hidden;
+  }
+  .card { text-align: center; }
+  .card__title, .card__text { padding-inline: 14px; }
+  .card__title {
+    font-size: var(--t-h3);
+    font-weight: var(--w-bold);
+    line-height: 1.1;
+    letter-spacing: var(--ls-title);
+  }
+  .card__text { margin-top: 10px; color: var(--c-ink-soft); }
+
+  /* Mapa */
+  .art-map {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(var(--c-line) 1px, transparent 1px) 0 0 / 28px 28px,
+      linear-gradient(90deg, var(--c-line) 1px, transparent 1px) 0 0 / 28px 28px,
+      #eef3ee;
+  }
+  .art-map__road { position: absolute; background: #fff; box-shadow: 0 0 0 1px var(--c-line); }
+  .art-map__road--h { left: 0; right: 0; top: 56%; height: 14px; transform: rotate(-8deg); }
+  .art-map__road--v { top: 0; bottom: 0; left: 46%; width: 12px; transform: rotate(10deg); }
+  .art-map__dot { position: absolute; left: var(--x); top: var(--y); width: 10px; height: 10px; border-radius: 50%; background: #c9cdc9; }
+  .art-map__pin {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin: -24px 0 0 -24px;
+    border-radius: 50% 50% 50% 4px;
+    transform: rotate(-45deg);
+    background: var(--c-green);
+    color: var(--c-ink);
+    box-shadow: 0 0 0 10px rgb(31 203 106 / 0.18), 0 0 0 22px rgb(31 203 106 / 0.08);
+    animation: bob 3s var(--ease-out) infinite;
+  }
+  .art-map__pin :global(svg) { transform: rotate(45deg); }
+  .art-map__label {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    padding: 8px 14px;
+    border-radius: var(--r-pill);
+    background: var(--c-surface);
+    box-shadow: var(--shadow-1);
+    font-size: var(--t-xs);
+    white-space: nowrap;
+  }
+  @keyframes bob { 50% { translate: 0 -6px; } }
+
+  /* Conversa */
+  .art-chat {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    background: #e9efe6;
+  }
+  .bubble {
+    max-width: 82%;
+    padding: 9px 13px;
+    border-radius: 16px;
+    font-size: var(--t-xs);
+    line-height: 1.35;
+    box-shadow: 0 1px 1px rgb(13 15 13 / 0.08);
+  }
+  .bubble--in { align-self: flex-start; background: #fff; border-bottom-left-radius: 4px; }
+  .bubble--out { align-self: flex-end; background: #c9f2d7; border-bottom-right-radius: 4px; }
+  .card--whatsapp:hover .bubble { animation: pop 0.5s var(--ease-spring) both; }
+  .card--whatsapp:hover .bubble:nth-child(2) { animation-delay: 0.08s; }
+  .card--whatsapp:hover .bubble:nth-child(3) { animation-delay: 0.16s; }
+  @keyframes pop { from { transform: scale(0.85); opacity: 0.4; } }
+
+  /* Velocidade */
+  .art-speed {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 14px;
+    background: var(--c-ink);
+    color: var(--c-on-dark);
+  }
+  .art-speed__value {
+    font-size: 4.5rem;
+    font-weight: var(--w-heavy);
+    line-height: 1;
+    letter-spacing: var(--ls-display);
+  }
+  .art-speed__value small { margin-left: 2px; font-family: var(--f-mono); font-size: 0.32em; font-weight: var(--w-medium); letter-spacing: 0; color: var(--c-green); }
+  .art-speed__bar { width: 180px; height: 6px; border-radius: 99px; background: var(--c-dark-2); overflow: hidden; }
+  .art-speed__bar span { display: block; height: 100%; width: 100%; border-radius: inherit; background: var(--c-green); transform-origin: left; animation: load 2.4s var(--ease-out) infinite; }
+  .art-speed__stars { display: flex; gap: 2px; color: var(--c-green); }
+  @keyframes load { from { transform: scaleX(0); } 60%, to { transform: scaleX(1); } }
+</style>

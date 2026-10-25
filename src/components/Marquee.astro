@@ -1,0 +1,54 @@
+---
+import { marquee } from '../content/site';
+---
+
+<div class="marquee-wrap" role="region" aria-label="Para quem eu faço sites">
+<div class="marquee">
+  <p class="sr-only">Sites e apps para: {marquee.join(', ')}.</p>
+  <div class="marquee__track" aria-hidden="true">
+    {[0, 1].map(() => (
+      <ul class="marquee__group" role="list">
+        {marquee.map((item, i) => (
+          <li class:list={[{ 'is-alt': i % 2 }]}>
+            {item}
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" /></svg>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>
+</div>
+
+<style>
+  .marquee-wrap { overflow: clip; padding-block: 28px; }
+  .marquee {
+    overflow: hidden;
+    padding-block: 22px;
+    background: var(--c-green);
+    color: var(--c-ink);
+    /* scale em vez de width > 100%: cobre as bordas sem criar rolagem lateral */
+    transform: rotate(-1.2deg) scaleX(1.04);
+  }
+  .marquee__track {
+    display: flex;
+    width: max-content;
+    animation: slide 44s linear infinite;
+  }
+  .marquee:hover .marquee__track { animation-play-state: paused; }
+  .marquee__group { display: flex; }
+  .marquee__group li {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding-right: 28px;
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+    font-weight: var(--w-heavy);
+    line-height: 1;
+    letter-spacing: var(--ls-display);
+    white-space: nowrap;
+  }
+  .marquee__group li.is-alt { font-weight: var(--w-regular); }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } }
+</style>

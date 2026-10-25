@@ -1,0 +1,84 @@
+---
+import Logo from './ui/Logo.astro';
+import { footer, nav, site, whatsappLink } from '../content/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__about">
+        <p class="footer__tagline">{footer.tagline}</p>
+        <address class="footer__region">{footer.regionText}</address>
+      </div>
+
+      <nav aria-label="Rodapé">
+        <ul role="list" class="footer__list">
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+
+      <ul role="list" class="footer__list">
+        <li><a href={whatsappLink()} target="_blank" rel="noopener">WhatsApp {site.phoneDisplay}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        {site.social.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.network} {s.label}</a></li>)}
+      </ul>
+    </div>
+
+    <Logo id="footer" class="footer__logo" />
+
+    <div class="footer__bottom">
+      <p>© {year} {site.name}{site.cnpj && ` · CNPJ ${site.cnpj}`}</p>
+      <p>Desenhado e construído por {site.owner}.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding-top: clamp(48px, 7vw, 88px); overflow: hidden; }
+  .footer__top {
+    display: grid;
+    gap: 32px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .footer__about { grid-column: 1 / -1; }
+  @media (min-width: 820px) {
+    .footer__top { grid-template-columns: 2fr 1fr 1.2fr; }
+    .footer__about { grid-column: auto; }
+  }
+  .footer__tagline {
+    font-size: var(--t-xl);
+    font-weight: var(--w-bold);
+    line-height: 1.1;
+    letter-spacing: var(--ls-title);
+  }
+  .footer__region { margin-top: 10px; font-style: normal; color: var(--c-ink-soft); max-width: 36ch; }
+  .footer__list { display: grid; align-content: start; gap: 6px; font-size: var(--t-sm); }
+  .footer__list a { overflow-wrap: anywhere; }
+  .footer__list a {
+    display: inline-block;
+    padding: 4px 0;
+    color: var(--c-ink-soft);
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+    transition: color var(--d-fast) ease, background-size var(--d-med) var(--ease-out);
+  }
+  .footer__list a:hover { color: var(--c-ink); background-size: 100% 1.5px; }
+
+  .footer :global(.footer__logo) {
+    width: 100%;
+    margin-block: clamp(32px, 5vw, 64px) clamp(16px, 3vw, 32px);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 24px;
+    padding-block: 24px 32px;
+    border-top: 1px solid var(--c-line);
+    font-size: var(--t-xs);
+    color: var(--c-ink-soft);
+  }
+</style>

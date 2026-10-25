@@ -1,0 +1,54 @@
+---
+import Icon from './ui/Icon.astro';
+import { whatsappLink } from '../content/site';
+---
+
+<a class="wa-float" href={whatsappLink()} target="_blank" rel="noopener" aria-label="Conversar no WhatsApp" data-wa-float>
+  <Icon name="whatsapp" size={26} />
+  <span class="wa-float__label">Fale comigo</span>
+</a>
+
+<script>
+  /* Aparece depois do hero e some quando o CTA final está na tela */
+  const btn = document.querySelector<HTMLElement>('[data-wa-float]');
+  const hero = document.querySelector('#topo');
+  const final = document.querySelector('#contato');
+  if (btn && hero && final) {
+    let pastHero = false;
+    let atFinal = false;
+    const render = () => btn.classList.toggle('is-visible', pastHero && !atFinal);
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; render(); }).observe(hero);
+    new IntersectionObserver(([e]) => { atFinal = e.isIntersecting; render(); }).observe(final);
+  }
+</script>
+
+<style>
+  .wa-float {
+    position: fixed;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+    padding: 0 17px;
+    border-radius: var(--r-pill);
+    background: var(--c-green);
+    color: var(--c-ink);
+    font-weight: 700;
+    font-size: var(--t-sm);
+    box-shadow: 0 14px 30px -10px rgb(13 15 13 / 0.45);
+    opacity: 0;
+    transform: translateY(24px) scale(0.9);
+    pointer-events: none;
+    transition: opacity var(--d-med) var(--ease-out), transform var(--d-med) var(--ease-spring);
+  }
+  .wa-float.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+  .wa-float:hover { background: var(--c-green-hover); }
+  .wa-float__label { display: none; }
+  @media (min-width: 760px) {
+    .wa-float { padding: 0 22px 0 18px; }
+    .wa-float__label { display: inline; }
+  }
+</style>

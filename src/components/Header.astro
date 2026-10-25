@@ -1,0 +1,98 @@
+---
+import Logo from './ui/Logo.astro';
+import Button from './ui/Button.astro';
+import { nav, whatsappLink } from '../content/site';
+---
+
+<header class="header" data-header>
+  <div class="header__bar container">
+    <a href="#topo" class="header__logo" aria-label="Studio Tonn, voltar ao início">
+      <Logo id="header" class="header__mark" />
+    </a>
+    <nav class="header__nav" aria-label="Principal">
+      <ul role="list">
+        {nav.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <Button href={whatsappLink()} icon="whatsapp" external class="header__cta">Orçamento</Button>
+  </div>
+</header>
+
+<script>
+  /* Fundo ao rolar; some ao descer e volta ao subir */
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  if (header) {
+    let lastY = window.scrollY;
+    let ticking = false;
+    const update = () => {
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 12);
+      if (Math.abs(y - lastY) > 6) {
+        header.classList.toggle('is-hidden', y > lastY && y > 480 && !header.contains(document.activeElement));
+        lastY = y;
+      }
+      ticking = false;
+    };
+    update();
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    padding-top: 12px;
+    pointer-events: none;
+    transition: transform 0.6s var(--ease-out);
+  }
+  .header.is-hidden { transform: translateY(-120%); }
+  .header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    pointer-events: auto;
+  }
+  .header__bar::before {
+    content: '';
+    position: absolute;
+    inset: -6px calc(var(--gutter) - 10px);
+    z-index: -1;
+    border-radius: var(--r-pill);
+    background: rgb(245 244 239 / 0.78);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    box-shadow: inset 0 0 0 1px var(--c-line), var(--shadow-1);
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity var(--d-med) var(--ease-out), transform var(--d-med) var(--ease-out);
+  }
+  .header__bar { position: relative; }
+  .header.is-scrolled .header__bar::before { opacity: 1; transform: none; }
+
+  .header__logo { display: block; padding: 6px 4px; border-radius: 10px; }
+  .header__logo :global(.header__mark) { width: clamp(108px, 10vw, 132px); }
+
+  .header__nav { display: none; }
+  .header__nav ul { display: flex; gap: 4px; }
+  .header__nav a {
+    display: block;
+    padding: 10px 14px;
+    border-radius: var(--r-pill);
+    font-size: var(--t-sm);
+    font-weight: var(--w-semibold);
+    color: var(--c-ink-soft);
+    transition: color var(--d-fast) ease, background-color var(--d-fast) ease;
+  }
+  .header__nav a:hover { color: var(--c-ink); background: rgb(13 15 13 / 0.05); }
+
+  @media (min-width: 980px) {
+    .header__nav { display: block; }
+  }
+</style>

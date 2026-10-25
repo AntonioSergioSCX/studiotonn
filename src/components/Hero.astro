@@ -1,0 +1,147 @@
+---
+import Button from './ui/Button.astro';
+import CaseCarousel from './CaseCarousel.astro';
+import { hero, whatsappLink } from '../content/site';
+import { splitAccent } from '../lib/format';
+---
+
+<section class="hero" id="topo" aria-labelledby="hero-title">
+  <div class="container">
+    <div class="hero__panel">
+      <h1 class="hero__title" id="hero-title">
+        {hero.titleLines.map((line) => (
+          <span class="hero__line">
+            {splitAccent(line).map((part, i) => (i % 2 ? <span class="accent">{part}</span> : part))}
+          </span>
+        ))}
+        <span class="hero__line hero__swap">
+          <span class="hero__phrase" data-phrase data-phrases={JSON.stringify(hero.phrases)}>{hero.fallbackPhrase}.</span>
+        </span>
+      </h1>
+
+      <p class="hero__lead">{hero.lead}</p>
+
+      <div class="hero__cta">
+        <Button href={whatsappLink()} size="lg" icon="whatsapp" external>{hero.cta}</Button>
+      </div>
+
+      <CaseCarousel />
+    </div>
+
+    <ul class="hero__proof" role="list">
+      {hero.proof.map((item) => (
+        <li><strong>{item.value}</strong><span>{item.label}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<script>
+  /* O fim do título passa uma vez por cada tipo de negócio e assenta em "o seu negócio." */
+  const phrase = document.querySelector<HTMLElement>('[data-phrase]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (phrase && !reduce) {
+    const final = phrase.textContent ?? '';
+    const sequence = [...(JSON.parse(phrase.dataset.phrases || '[]') as string[]), final];
+    const STEP = 2200;
+
+    const swap = (text: string) => {
+      phrase.classList.add('is-out');
+      window.setTimeout(() => {
+        phrase.textContent = text;
+        phrase.classList.remove('is-out');
+        phrase.classList.add('is-enter');
+        void phrase.offsetWidth;
+        phrase.classList.remove('is-enter');
+      }, 320);
+    };
+
+    sequence.forEach((text, i) => window.setTimeout(() => swap(text), 1400 + i * STEP));
+  }
+</script>
+
+<style>
+  .hero { padding-top: 88px; }
+
+  /* Bloco arredondado com luz verde suave, conteúdo centralizado */
+  .hero__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(64px, 9vw, 112px) clamp(16px, 4vw, 48px) 0;
+    border-radius: var(--r-xl);
+    background:
+      radial-gradient(70% 55% at 50% 0%, rgb(31 203 106 / 0.16), transparent 70%),
+      linear-gradient(180deg, #eaf5ee 0%, #f1f3ee 60%, #ecebe4 100%);
+    box-shadow: inset 0 0 0 1px rgb(13 15 13 / 0.05);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero__title {
+    font-size: clamp(2.75rem, 11vw, 5.75rem);
+    font-weight: var(--w-heavy);
+    line-height: 0.98;
+    letter-spacing: var(--ls-display);
+  }
+  @media (min-width: 760px) {
+    .hero__title { font-size: clamp(3.5rem, 7vw, 5.75rem); }
+  }
+  .hero__line { display: block; }
+
+  /* Última linha: troca de frase sem empurrar o layout */
+  .hero__swap {
+    white-space: nowrap;
+    overflow: hidden;
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
+  }
+  .hero__phrase {
+    display: inline-block;
+    transition: transform 0.7s var(--ease-out), opacity 0.5s ease, filter 0.6s ease;
+  }
+  .hero__phrase:global(.is-out) {
+    transform: translateY(-55%);
+    opacity: 0;
+    filter: blur(6px);
+    transition-duration: 0.32s;
+    transition-timing-function: var(--ease-in-out);
+  }
+  .hero__phrase:global(.is-enter) {
+    transform: translateY(55%);
+    opacity: 0;
+    filter: blur(6px);
+    transition: none;
+  }
+
+  .hero__lead {
+    max-width: 52ch;
+    margin-top: 28px;
+    font-size: var(--t-lg);
+    line-height: 1.55;
+    color: var(--c-ink-soft);
+  }
+  .hero__cta { margin-top: 36px; }
+
+  .hero__proof {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 40px;
+    padding-block: 28px 24px;
+    font-size: var(--t-sm);
+    color: var(--c-ink-soft);
+  }
+  .hero__proof li { display: flex; align-items: baseline; gap: 8px; }
+  .hero__proof strong {
+    font-size: 1.125rem;
+    font-weight: var(--w-bold);
+    letter-spacing: var(--ls-title);
+    color: var(--c-ink);
+  }
+  @media (max-width: 559px) {
+    .hero__proof { flex-direction: column; align-items: center; gap: 6px; }
+  }
+</style>

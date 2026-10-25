@@ -1,0 +1,113 @@
+---
+import SectionHead from './ui/SectionHead.astro';
+import { about, site } from '../content/site';
+---
+
+<section class="section about" id="sobre" aria-labelledby="sobre-title">
+  <div class="container about__wrap">
+    <figure class="avatar" data-reveal>
+      {about.photo ? (
+        <img src={about.photo} srcset={`${about.photo} 1x, ${about.photo.replace('.webp', '@2x.webp')} 2x`} alt={about.photoAlt} width="144" height="144" loading="lazy" decoding="async" />
+      ) : (
+        <div class="avatar__mono" role="img" aria-label={about.photoAlt}><span aria-hidden="true">A</span></div>
+      )}
+      <figcaption class="avatar__tag"><strong>{site.owner}</strong> · {site.role}</figcaption>
+    </figure>
+
+    <SectionHead index="004" eyebrow={about.eyebrow} title={about.title} id="sobre-title" />
+
+    <div class="about__copy">
+      {about.paragraphs.map((p, i) => <p data-reveal style={`--i:${i}`}>{p}</p>)}
+    </div>
+
+    <div class="about__grid">
+      <dl class="facts" data-reveal>
+        {about.facts.map((f) => (
+          <div>
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <blockquote class="quote" data-reveal style="--i:1">
+        <p>“{about.testimonial.quote}”</p>
+        <footer><strong>{about.testimonial.author}</strong> · {about.testimonial.business}</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about { padding-top: 0; }
+  .about__wrap { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+  .avatar { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .avatar img,
+  .avatar__mono {
+    width: 144px;
+    height: 144px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 0 6px var(--c-surface), 0 0 0 7px var(--c-line), 0 20px 40px -16px rgb(31 203 106 / 0.5);
+  }
+  .avatar__mono {
+    display: grid;
+    place-items: center;
+    background: radial-gradient(60% 60% at 30% 25%, rgb(255 255 255 / 0.35), transparent 70%), var(--c-green);
+  }
+  .avatar__mono span { font-size: 3.5rem; font-weight: var(--w-heavy); letter-spacing: -0.05em; line-height: 1; color: var(--c-ink); }
+  .avatar__tag { font-size: var(--t-sm); color: var(--c-ink-soft); }
+  .avatar__tag strong { color: var(--c-ink); }
+
+  .about__wrap :global(.sh) { margin-bottom: 24px; }
+  .about__copy { max-width: 60ch; }
+  .about__copy p { font-size: var(--t-lg); color: var(--c-ink-soft); }
+  .about__copy p + p { margin-top: 14px; }
+
+  .about__grid {
+    display: grid;
+    gap: 12px;
+    width: 100%;
+    max-width: 980px;
+    margin-top: 48px;
+  }
+  @media (min-width: 860px) { .about__grid { grid-template-columns: 1fr 1.4fr; } }
+
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .facts div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 16px;
+    border-radius: var(--r-md);
+    background: var(--c-surface);
+    box-shadow: inset 0 0 0 1px var(--c-line);
+  }
+  .facts dt { font-size: var(--t-sm); color: var(--c-ink-soft); }
+  .facts dd {
+    font-size: clamp(2.4rem, 2rem + 1.5vw, 3.25rem);
+    font-weight: var(--w-heavy);
+    line-height: 1;
+    letter-spacing: var(--ls-display);
+  }
+
+  .quote {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    border-radius: var(--r-md);
+    background: var(--c-ink);
+    color: var(--c-on-dark);
+  }
+  .quote p {
+    font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+    font-weight: var(--w-semibold);
+    line-height: 1.4;
+    letter-spacing: var(--ls-title);
+  }
+  .quote footer { margin-top: 16px; font-size: var(--t-sm); color: var(--c-on-dark-soft); }
+  .quote strong { color: var(--c-on-dark); }
+</style>
