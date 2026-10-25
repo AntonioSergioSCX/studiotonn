@@ -11,18 +11,20 @@ npm run build    # gera a pasta dist/ para publicar
 npm run og       # regenera public/og.png a partir de scripts/og.svg
 ```
 
-## Publicação (GitHub → Cloudflare Pages)
+## Publicação (GitHub → Cloudflare)
 
 O site é gerado automaticamente pela Cloudflare a cada `git push` na branch `main`.
 
-Configuração do projeto em **Workers & Pages → Connect to Git**:
+Configuração em **Workers & Pages → studiotonn → Settings → Build**:
 
 | Campo | Valor |
 | --- | --- |
-| Framework preset | Astro |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
-| Node | definido em `.node-version` (24) |
+| Deploy command | `npx wrangler deploy` |
+| Root directory | `/` |
+
+O `wrangler.jsonc` diz ao Wrangler para publicar a pasta `dist/`. O Node vem de `.node-version` (24).
+O `package-lock.json` é gerado com npm 10, a versão usada no build da Cloudflare. Se atualizar dependências, rode `npx npm@10 install` para manter o lockfile compatível.
 
 Domínio: studiotonn.com.br (em `site.ts`, `astro.config.mjs`, `robots.txt` e `sitemap.xml`).
 O arquivo `public/_headers` configura o cache das fontes, ícones e imagens.

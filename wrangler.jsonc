@@ -1,0 +1,9 @@
+// Cloudflare Workers: publica o site estático gerado em dist/ (npm run build).
+{
+  "name": "studiotonn",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
