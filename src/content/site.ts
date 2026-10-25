@@ -155,22 +155,22 @@ export const process = {
   title: 'Simples do *primeiro oi* ao site no ar.',
   steps: [
     {
-      icon: '/icons/passo-conversa.webp',
+      icon: '/icons/passo-conversa.webp?v=2',
       title: 'Conversa de 30 minutos',
       text: 'Presencial ou por vídeo, como for melhor para você. Você me conta do seu negócio. Sem custo e sem compromisso.',
     },
     {
-      icon: '/icons/passo-proposta.webp',
+      icon: '/icons/passo-proposta.webp?v=2',
       title: 'Proposta com preço fechado',
       text: 'Em até 2 dias você recebe o que vai ser feito, o prazo e o valor. Sem surpresa no fim.',
     },
     {
-      icon: '/icons/passo-construo.webp',
+      icon: '/icons/passo-construo.webp?v=2',
       title: 'Eu desenho e construo',
       text: 'Você acompanha e aprova cada etapa. O que você vê na tela é exatamente o que vai ao ar.',
     },
     {
-      icon: '/icons/passo-no-ar.webp',
+      icon: '/icons/passo-no-ar.webp?v=2',
       title: 'No ar e no Google',
       text: 'Publico, cadastro no Google e fico 30 dias ajustando o que precisar, sem custo extra.',
     },
@@ -210,10 +210,10 @@ export const services = {
     },
   ],
   guarantees: [
-    { icon: '/icons/garantia-preco-fechado.webp', title: 'Preço fechado', text: 'O valor da proposta é o valor final.' },
-    { icon: '/icons/garantia-no-seu-nome.webp', title: 'Tudo no seu nome', text: 'Domínio, código e acessos são seus.' },
-    { icon: '/icons/garantia-30-dias.webp', title: '30 dias de ajustes', text: 'Depois de no ar, sem custo extra.' },
-    { icon: '/icons/garantia-contrato.webp', title: 'Contrato e nota', text: 'Tudo formalizado, do jeito certo.' },
+    { icon: '/icons/garantia-preco-fechado.webp?v=2', title: 'Preço fechado', text: 'O valor da proposta é o valor final.' },
+    { icon: '/icons/garantia-no-seu-nome.webp?v=2', title: 'Tudo no seu nome', text: 'Domínio, código e acessos são seus.' },
+    { icon: '/icons/garantia-30-dias.webp?v=2', title: '30 dias de ajustes', text: 'Depois de no ar, sem custo extra.' },
+    { icon: '/icons/garantia-contrato.webp?v=2', title: 'Contrato e nota', text: 'Tudo formalizado, do jeito certo.' },
   ],
 };
 
@@ -226,7 +226,7 @@ export const about = {
     `Oi, eu sou o ${site.owner}. Há ${site.years} anos crio produtos digitais, de sites para negócios do bairro a apps usados por milhares de pessoas.`,
     'Como eu desenho e também programo, nada se perde no caminho: o que você aprova é exatamente o que vai ao ar. E você fala sempre comigo, sem atendente, sem intermediário.',
   ],
-  photo: '/images/antonio.webp', // versão @2x ao lado, para telas retina. Vazio = monograma.
+  photo: '/images/antonio.webp?v=2', // versão @2x ao lado, para telas retina. Vazio = monograma.
   photoAlt: `${site.owner}, ${site.role} do Studio Tonn`,
   facts: [
     { value: `${site.years}`, label: 'anos criando produtos digitais' },
