@@ -84,19 +84,23 @@ export const results = {
   eyebrow: 'O que muda no seu negócio',
   title: 'Feito para *vender*, não só para ficar bonito.',
   lead: 'Site bonito que ninguém encontra não paga a conta. Cada detalhe é pensado para uma coisa: transformar quem visita em cliente.',
+  // Imagens em public/images: <nome>.webp (480px) e <nome>@2x.webp (960px)
   items: [
     {
       id: 'google',
+      image: '/images/resultado-google',
       title: 'Te encontram no Google',
       text: 'Quando alguém da sua cidade procura pelo que você faz, é o seu negócio que aparece.',
     },
     {
       id: 'whatsapp',
+      image: '/images/resultado-whatsapp',
       title: 'Chamam no WhatsApp',
       text: 'Botões no lugar certo levam a pessoa direto para a conversa com você. Menos curioso, mais cliente.',
     },
     {
       id: 'trust',
+      image: '/images/resultado-confianca',
       title: 'Confiam de primeira',
       text: 'Abre rápido até no 4G e passa profissionalismo. O cliente escolhe você antes de comparar preço.',
     },
