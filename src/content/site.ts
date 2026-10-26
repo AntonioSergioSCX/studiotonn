@@ -45,7 +45,7 @@ export const whatsappLink = (
 
 export const seo = {
   title: `Sites e apps em ${site.region.cities[0]} e ${site.region.name} | Studio Tonn`,
-  description: `Sites e apps para clínicas, lojas, academias, escritórios e empresas de produto digital. Preço fechado, no ar em poucas semanas. Atendimento presencial em ${citiesLabel} (${site.region.state}) e online em ${site.serviceArea}.`,
+  description: `Sites e apps para clínicas, lojas, academias, escritórios e empresas de produto digital. Preço fechado, site no ar em até 1 semana. Atendimento presencial em ${citiesLabel} (${site.region.state}) e online em ${site.serviceArea}.`,
   ogImage: '/og.png',
 };
 
@@ -108,48 +108,39 @@ export const results = {
 };
 
 /* ── CASES (carrossel do topo) ───────────────────────────── */
-// ⚠ EDITAR: projetos de EXEMPLO. Troque pelos seus cases reais (nome, resultado e link).
-// Com `image`, o card mostra o print do site numa janela de navegador em vez do desenho.
+// Cada case mostra uma imagem real:
+//   `image`   → print do site (public/images/cases/<nome>.webp + <nome>-640.webp), numa janela de navegador
+//   `screens` → telas do app (public/images/cases/<nome>-1.webp…), rolando de lado dentro de celulares
+// ⚠ EDITAR: os selos de resultado (`result`) ainda são provisórios.
 
 export const cases = {
   label: 'Trabalhos recentes',
   items: [
     {
-      // ⚠ EDITAR: imagem de teste. Tipo e resultado ainda são provisórios.
-      name: 'Compactarq',
+      name: 'CompactArq',
       type: 'Site · Arquitetura',
       result: 'Site novo no ar',
-      kind: 'site',
-      image: '/images/cases/compactarq.webp', // print da página inteira (largura 1440px); rola ao passar o mouse
+      image: '/images/cases/compactarq',
       bg: '#e9e1d4',
       color: '#2d2520',
       href: '',
     },
     {
-      name: 'Casa Alma',
-      type: 'Loja online',
-      result: 'Vendas no Pix 7 dias por semana',
-      kind: 'shop',
-      bg: '#f1e2d6',
-      color: '#a4512f',
+      name: 'Olaria',
+      type: 'Site · Cerâmica artesanal',
+      result: 'Vitrine para as peças feitas à mão',
+      image: '/images/cases/olaria',
+      bg: '#efe6da',
+      color: '#b8673f',
       href: '',
     },
     {
-      name: 'Rotina',
-      type: 'Aplicativo de treinos',
-      result: 'Do rascunho à loja de apps em 10 semanas',
-      kind: 'app',
-      bg: '#e4e1f6',
-      color: '#4b3bb5',
-      href: '',
-    },
-    {
-      name: 'Gestão Prado',
-      type: 'Sistema interno',
-      result: 'Agenda, clientes e financeiro num lugar só',
-      kind: 'system',
-      bg: '#e3e8ef',
-      color: '#23345c',
+      name: 'Constância',
+      type: 'App · Hábitos',
+      result: 'Cada dia vira um quadradinho',
+      screens: ['/images/cases/constancia-1', '/images/cases/constancia-2', '/images/cases/constancia-3', '/images/cases/constancia-4'],
+      bg: '#e3e7df',
+      color: '#0b0b0b',
       href: '',
     },
   ],
@@ -197,21 +188,21 @@ export const services = {
     {
       name: 'Site',
       desc: 'Para o seu negócio aparecer no Google e transformar visita em conversa no WhatsApp.',
-      time: 'No ar em 2 a 4 semanas',
+      time: 'No ar em até 1 semana',
       features: ['Página única ou site completo', 'WhatsApp, mapa e agendamento', 'Pronto para aparecer no Google', 'Domínio e hospedagem configurados'],
       featured: true,
     },
     {
       name: 'Aplicativo',
       desc: 'Um app no celular dos seus clientes para agendar, comprar ou acompanhar pedidos.',
-      time: 'Primeira versão em ~10 semanas',
+      time: 'MVP em ~1 a 3 semanas',
       features: ['iPhone e Android', 'Pagamentos e notificações', 'Publicação na App Store e Google Play', 'Acompanhamento depois do lançamento'],
       featured: false,
     },
     {
       name: 'Sistema',
       desc: 'Um painel sob medida para organizar agenda, clientes, estoque e financeiro num lugar só.',
-      time: 'Primeira versão em ~8 semanas',
+      time: 'MVP em ~2 semanas',
       features: ['Acesso pelo navegador, de onde estiver', 'Feito para o jeito que sua empresa trabalha', 'Acessos separados para a equipe', 'Relatórios para decidir com clareza'],
       featured: false,
     },
@@ -242,7 +233,7 @@ export const about = {
   testimonial: {
     quote: 'Em um mês o site já estava no ar e o telefone parou de tocar só para perguntar preço. Agora o cliente chega decidido.',
     author: 'Allana Santos',
-    business: 'Casa Amparo, Viçosa – MG',
+    business: 'CompactArq, Viçosa – MG',
   },
 };
 
@@ -264,7 +255,7 @@ export const faq = {
     },
     {
       q: 'Quanto tempo leva para ficar pronto?',
-      a: 'Um site fica no ar entre 2 e 4 semanas. Sistemas e aplicativos têm a primeira versão entre 8 e 10 semanas. O prazo exato vem na proposta.',
+      a: 'Um site fica no ar em até 1 semana. Aplicativos e sistemas têm a primeira versão (MVP) entre 1 e 3 semanas. O prazo exato vem na proposta.',
     },
     {
       q: 'O site vai aparecer no Google?',

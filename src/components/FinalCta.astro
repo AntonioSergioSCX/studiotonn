@@ -1,6 +1,7 @@
 ---
 import Button from './ui/Button.astro';
 import Icon from './ui/Icon.astro';
+import Aurora from './ui/Aurora.astro';
 import { finalCta, whatsappLink } from '../content/site';
 import { splitAccent } from '../lib/format';
 ---
@@ -8,7 +9,7 @@ import { splitAccent } from '../lib/format';
 <section class="final" id="contato" aria-labelledby="contato-title">
   <div class="container">
     <div class="final__card on-dark">
-      <div class="final__aurora" aria-hidden="true"><span class="final__light"></span><span class="final__dots"></span></div>
+      <Aurora />
       <p class="final__kicker" data-reveal>{finalCta.kicker}</p>
       <h2 class="final__title" id="contato-title" data-reveal style="--i:1">
         {splitAccent(finalCta.title).map((part, i) => (i % 2 ? <span class="accent">{part}</span> : part))}
@@ -37,39 +38,6 @@ import { splitAccent } from '../lib/format';
     text-align: center;
     overflow: hidden;
     isolation: isolate;
-  }
-  /* Degradê em CSS puro: luz verde-limão subindo da base, faixas verticais e trama de pontos */
-  .final__aurora {
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    /* faixas verticais suaves, mais visíveis perto da base */
-    background: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.035) 0 1px, transparent 1px 7.14%);
-    mask-image: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.6) 35%, transparent 70%);
-    -webkit-mask-image: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.6) 35%, transparent 70%);
-  }
-  .final__light,
-  .final__dots { position: absolute; inset: 0; }
-  .final__light {
-    background:
-      radial-gradient(42% 38% at 30% 108%, #b6f23a 0%, rgb(150 230 50 / 0.75) 28%, transparent 72%),
-      radial-gradient(44% 42% at 66% 108%, #6fe04e 0%, rgb(94 204 66 / 0.7) 30%, transparent 72%),
-      radial-gradient(70% 60% at 50% 112%, rgb(55 160 35 / 0.85) 0%, rgb(25 90 18 / 0.5) 40%, transparent 75%),
-      radial-gradient(30% 40% at 4% 100%, rgb(80 120 20 / 0.6), transparent 70%),
-      radial-gradient(30% 40% at 96% 100%, rgb(30 105 25 / 0.6), transparent 70%);
-    transform-origin: 50% 100%;
-    animation: breathe 9s var(--ease-in-out) infinite alternate;
-  }
-  .final__dots {
-    background: radial-gradient(circle, rgb(215 255 200 / 0.45) 0 1px, transparent 1.6px) 0 0 / 12px 12px;
-    mask-image: radial-gradient(40% 55% at 50% 100%, #000 0%, rgb(0 0 0 / 0.5) 45%, transparent 80%);
-    -webkit-mask-image: radial-gradient(40% 55% at 50% 100%, #000 0%, rgb(0 0 0 / 0.5) 45%, transparent 80%);
-    opacity: 0.7;
-  }
-  @keyframes breathe {
-    from { transform: scale(1, 0.94); opacity: 0.92; }
-    to { transform: scale(1.04, 1.06); opacity: 1; }
   }
   .final__kicker {
     font-family: var(--f-mono);

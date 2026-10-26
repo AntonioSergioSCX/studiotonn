@@ -2,6 +2,7 @@
 import SectionHead from './ui/SectionHead.astro';
 import Button from './ui/Button.astro';
 import Icon from './ui/Icon.astro';
+import Aurora from './ui/Aurora.astro';
 import { services, site, whatsappLink } from '../content/site';
 ---
 
@@ -17,6 +18,7 @@ import { services, site, whatsappLink } from '../content/site';
           style={`--i:${i}`}
           data-spotlight={item.featured ? '' : undefined}
         >
+          {item.featured && <Aurora />}
           <div class="plan__top">
             <span class="plan__index">{String(i + 1).padStart(2, '0')}</span>
             {item.featured && <span class="plan__badge">{services.featuredBadge}</span>}
@@ -76,7 +78,7 @@ import { services, site, whatsappLink } from '../content/site';
     box-shadow: inset 0 0 0 1px var(--c-line), var(--shadow-2);
   }
   .plan--featured {
-    background: var(--c-dark);
+    background: #000;
     color: var(--c-on-dark);
     box-shadow: 0 30px 60px -28px rgb(13 15 13 / 0.6);
   }
