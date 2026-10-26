@@ -206,7 +206,9 @@ const total = cases.items.length;
     gap: 12px;
     padding: 10px 12px 14px;
     text-align: left;
+    transition: opacity 0.5s ease;
   }
+  .case__id { min-width: 0; }
   .case__name {
     font-size: 1.125rem;
     font-weight: var(--w-bold);
@@ -223,7 +225,9 @@ const total = cases.items.length;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    flex: none;
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
     padding: 6px 12px;
     border-radius: var(--r-pill);
     background: var(--c-green-soft);
@@ -268,6 +272,11 @@ const total = cases.items.length;
     .case[data-pos='-1'] { --x: -0.2; }
     .case[data-pos='1'] { --x: 0.2; }
     .case__head { flex-direction: column; align-items: flex-start; gap: 8px; }
+    /* Selo quebra linha em vez de vazar do card */
+    .case__result { white-space: normal; line-height: 1.3; padding: 6px 10px; }
+    .case__result :global(svg) { flex: none; }
+    /* Cards laterais mostram só a imagem: nada de texto cortado nas bordas */
+    .case:not([data-pos='0']) .case__head { opacity: 0; }
     .cases__arrow { width: 44px; height: 44px; top: 52%; }
     .cases__arrow--prev { left: calc(50% - var(--w) / 2 + 6px); }
     .cases__arrow--next { left: calc(50% + var(--w) / 2 - 6px); }
