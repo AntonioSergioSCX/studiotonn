@@ -7,7 +7,7 @@ import { nav, whatsappLink } from '../content/site';
 <header class="header" data-header>
   <div class="header__bar container">
     <a href="#topo" class="header__logo" aria-label="Studio Tonn, voltar ao início">
-      <Logo id="header" class="header__mark" />
+      <Logo class="header__mark" />
     </a>
     <nav class="header__nav" aria-label="Principal">
       <ul role="list">
@@ -76,8 +76,8 @@ import { nav, whatsappLink } from '../content/site';
   .header__bar { position: relative; }
   .header.is-scrolled .header__bar::before { opacity: 1; transform: none; }
 
-  .header__logo { display: block; padding: 6px 4px; border-radius: 10px; }
-  .header__logo :global(.header__mark) { width: clamp(108px, 10vw, 132px); }
+  .header__logo { display: block; margin-left: 6px; padding: 6px 4px; border-radius: 10px; }
+  .header__logo :global(.header__mark) { width: clamp(128px, 12vw, 156px); }
 
   .header__nav { display: none; }
   .header__nav ul { display: flex; gap: 4px; }
