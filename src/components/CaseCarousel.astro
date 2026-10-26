@@ -43,7 +43,12 @@ const total = cases.items.length;
             </header>
 
             <div class="case__art" aria-hidden="true">
-              {c.kind === 'site' && (
+              {c.image ? (
+                <div class="mock-shot">
+                  <div class="mock-site__bar"><i></i><i></i><i></i></div>
+                  <img src={`${c.image}?v=1`} alt="" width="526" height="777" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </div>
+              ) : c.kind === 'site' && (
                 <div class="mock-site">
                   <div class="mock-site__bar"><i></i><i></i><i></i></div>
                   <div class="mock-site__hero">
@@ -316,6 +321,29 @@ const total = cases.items.length;
   .mock-site__hero .l.s { width: 44%; }
   .mock-site__grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 90px; gap: 10px; padding: 4px 26px 26px; }
   .mock-site__grid span { border-radius: 10px; background: color-mix(in srgb, var(--c) 10%, var(--c-surface-2)); }
+
+  /* Print real do site: a imagem desce devagar ao passar o mouse, como quem rola a página */
+  .mock-shot {
+    position: absolute;
+    inset: 8% 7% -6%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px 14px 0 0;
+    background: #fff;
+    box-shadow: var(--shadow-2);
+    overflow: hidden;
+  }
+  .mock-shot img {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 0;
+    transition: object-position 6s cubic-bezier(0.45, 0, 0.25, 1);
+  }
+  @media (hover: hover) {
+    .case[data-pos='0']:hover .mock-shot img { object-position: 50% 100%; }
+  }
 
   .mock-shop {
     position: absolute;

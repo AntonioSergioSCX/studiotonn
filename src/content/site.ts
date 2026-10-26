@@ -109,17 +109,20 @@ export const results = {
 
 /* ── CASES (carrossel do topo) ───────────────────────────── */
 // ⚠ EDITAR: projetos de EXEMPLO. Troque pelos seus cases reais (nome, resultado e link).
+// Com `image`, o card mostra o print do site numa janela de navegador em vez do desenho.
 
 export const cases = {
   label: 'Trabalhos recentes',
   items: [
     {
-      name: 'Clínica Vitta',
-      type: 'Site + agendamento online',
-      result: 'Agenda pelo site em vez do telefone',
+      // ⚠ EDITAR: imagem de teste. Tipo e resultado ainda são provisórios.
+      name: 'Compactarq',
+      type: 'Site · Arquitetura',
+      result: 'Site novo no ar',
       kind: 'site',
-      bg: '#dfe9e4',
-      color: '#2f6f73',
+      image: '/images/cases/compactarq.webp', // print da página inteira (largura 1440px); rola ao passar o mouse
+      bg: '#e9e1d4',
+      color: '#2d2520',
       href: '',
     },
     {
@@ -230,7 +233,7 @@ export const about = {
     `Oi, eu sou o ${site.owner}. Há ${site.years} anos crio produtos digitais, de sites para negócios do bairro a apps usados por milhares de pessoas.`,
     'Como eu desenho e também programo, nada se perde no caminho: o que você aprova é exatamente o que vai ao ar. E você fala sempre comigo, sem atendente, sem intermediário.',
   ],
-  photo: '/images/antonio.webp?v=2', // versão @2x ao lado, para telas retina. Vazio = monograma.
+  photo: '/images/antonio.webp?v=3', // versão @2x ao lado, para telas retina. Vazio = monograma.
   photoAlt: `${site.owner}, ${site.role} do Studio Tonn`,
   facts: [
     { value: `${site.years}`, label: 'anos criando produtos digitais' },
