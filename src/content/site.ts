@@ -111,7 +111,6 @@ export const results = {
 // Cada case mostra uma imagem real:
 //   `image`   → print do site (public/images/cases/<nome>.webp + <nome>-640.webp), numa janela de navegador
 //   `screens` → telas do app (public/images/cases/<nome>-1.webp…), rolando de lado dentro de celulares
-// ⚠ EDITAR: os selos de resultado (`result`) ainda são provisórios.
 
 export const cases = {
   label: 'Trabalhos recentes',
@@ -119,7 +118,7 @@ export const cases = {
     {
       name: 'CompactArq',
       type: 'Site · Arquitetura',
-      result: 'Site novo no ar',
+      result: 'Mais agendamentos',
       image: '/images/cases/compactarq',
       bg: '#e9e1d4',
       color: '#2d2520',
@@ -128,7 +127,7 @@ export const cases = {
     {
       name: 'Olaria',
       type: 'Site · Cerâmica artesanal',
-      result: 'Vitrine para as peças feitas à mão',
+      result: 'Mais visibilidade',
       image: '/images/cases/olaria',
       bg: '#efe6da',
       color: '#b8673f',
@@ -137,7 +136,7 @@ export const cases = {
     {
       name: 'Constância',
       type: 'App · Hábitos',
-      result: 'Cada dia vira um quadradinho',
+      result: 'Otimização interna',
       screens: ['/images/cases/constancia-1', '/images/cases/constancia-2', '/images/cases/constancia-3', '/images/cases/constancia-4'],
       bg: '#e3e7df',
       color: '#0b0b0b',
