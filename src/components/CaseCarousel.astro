@@ -46,17 +46,19 @@ const total = cases.items.length;
               {c.image ? (
                 <div class="mock-shot">
                   <div class="mock-site__bar"><i></i><i></i><i></i></div>
-                  <img
-                    src={`${c.image}.webp?v=2`}
-                    srcset={`${c.image}-640.webp?v=2 640w, ${c.image}.webp?v=2 1240w`}
-                    sizes="(min-width: 760px) 640px, 80vw"
-                    alt=""
-                    width="1240"
-                    height="760"
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    fetchpriority={i === 0 ? 'high' : undefined}
-                    decoding="async"
-                  />
+                  <span class="mock-shot__view">
+                    <img
+                      src={`${c.image}.webp?v=2`}
+                      srcset={`${c.image}-640.webp?v=2 640w, ${c.image}.webp?v=2 1240w`}
+                      sizes="(min-width: 760px) 640px, 80vw"
+                      alt=""
+                      width="1240"
+                      height="760"
+                      loading={i === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={i === 0 ? 'high' : undefined}
+                      decoding="async"
+                    />
+                  </span>
                 </div>
               ) : c.screens ? (
                 <div class="mock-screens">
@@ -310,16 +312,25 @@ const total = cases.items.length;
     box-shadow: var(--shadow-2);
     overflow: hidden;
   }
-  .mock-shot img {
+  /* Imagem sempre na largura toda (sem cortar as laterais); se for mais alta que a janela, desce no hover */
+  .mock-shot__view {
     flex: 1;
     min-height: 0;
+    overflow: hidden;
+    container-type: size;
+  }
+  .mock-shot img {
     width: 100%;
-    object-fit: cover;
-    object-position: 50% 0;
-    transition: object-position 6s cubic-bezier(0.45, 0, 0.25, 1);
+    height: auto;
+    transition: translate 6s cubic-bezier(0.45, 0, 0.25, 1);
+  }
+  /* No celular a janela acompanha a altura do print, sem faixa vazia embaixo */
+  @media (max-width: 759px) {
+    .mock-shot { bottom: auto; max-height: 100%; }
+    .mock-shot__view { flex: none; container-type: normal; }
   }
   @media (hover: hover) {
-    .case[data-pos='0']:hover .mock-shot img { object-position: 50% 100%; }
+    .case[data-pos='0']:hover .mock-shot img { translate: 0 min(0px, calc(100cqh - 100%)); }
   }
 
   /* Telas do app em celulares, passando de lado sem parar */
