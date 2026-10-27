@@ -12,7 +12,7 @@ export const site = {
   name: 'Studio Tonn',
   url: 'https://studiotonn.com.br', // ⚠ EDITAR: domínio final
   owner: 'Antonio',
-  ownerFullName: '', // ⚠ EDITAR: nome completo (aparece só para Google e IAs). Vazio = usa `owner`.
+  ownerFullName: 'Antonio Sergio', // aparece só para Google e IAs. Vazio = usa `owner`.
   role: 'Design Engineer',
   years: 6,
   whatsapp: '5524992090397', // 55 + DDD + número, só dígitos
