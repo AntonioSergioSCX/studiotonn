@@ -39,7 +39,7 @@ const jsonLd = {
         serviceUrl: site.url,
         availableLanguage: 'pt-BR',
       },
-      founder: { '@type': 'Person', name: site.owner, jobTitle: site.role },
+      founder: { '@type': 'Person', name: site.ownerFullName || site.owner, jobTitle: site.role },
       knowsLanguage: 'pt-BR',
       sameAs: site.social.map((s) => s.href),
       hasOfferCatalog: {

@@ -12,6 +12,7 @@ export const site = {
   name: 'Studio Tonn',
   url: 'https://studiotonn.com.br', // ⚠ EDITAR: domínio final
   owner: 'Antonio',
+  ownerFullName: '', // ⚠ EDITAR: nome completo (aparece só para Google e IAs). Vazio = usa `owner`.
   role: 'Design Engineer',
   years: 6,
   whatsapp: '5524992090397', // 55 + DDD + número, só dígitos
@@ -120,6 +121,7 @@ export const cases = {
       type: 'Site · Arquitetura',
       result: 'Mais agendamentos',
       image: '/images/cases/compactarq',
+      alt: 'Página inicial do site da CompactArq, escritório de arquitetura para pequenos negócios',
       bg: '#e9e1d4',
       color: '#2d2520',
       href: '',
@@ -129,6 +131,7 @@ export const cases = {
       type: 'Site · Cerâmica artesanal',
       result: 'Mais visibilidade',
       image: '/images/cases/olaria',
+      alt: 'Página inicial do site da Olaria, marca de cerâmica artesanal brasileira',
       bg: '#efe6da',
       color: '#b8673f',
       href: '',
@@ -138,6 +141,7 @@ export const cases = {
       type: 'App · Hábitos',
       result: 'Otimização interna',
       screens: ['/images/cases/constancia-1', '/images/cases/constancia-2', '/images/cases/constancia-3', '/images/cases/constancia-4'],
+      alt: 'Telas do app Constância: progresso em quadradinhos, lista de hábitos e cadastro de novo hábito',
       bg: '#e3e7df',
       color: '#0b0b0b',
       href: '',

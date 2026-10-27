@@ -42,16 +42,16 @@ const total = cases.items.length;
               <p class="case__result"><Icon name="check" size={14} />{c.result}</p>
             </header>
 
-            <div class="case__art" aria-hidden="true">
+            <div class="case__art">
               {c.image ? (
                 <div class="mock-shot">
-                  <div class="mock-site__bar"><i></i><i></i><i></i></div>
+                  <div class="mock-site__bar" aria-hidden="true"><i></i><i></i><i></i></div>
                   <span class="mock-shot__view">
                     <img
                       src={`${c.image}.webp?v=2`}
                       srcset={`${c.image}-640.webp?v=2 640w, ${c.image}.webp?v=2 1240w`}
                       sizes="(min-width: 760px) 640px, 80vw"
-                      alt=""
+                      alt={c.alt}
                       width="1240"
                       height="760"
                       loading={i === 0 ? 'eager' : 'lazy'}
@@ -61,9 +61,9 @@ const total = cases.items.length;
                   </span>
                 </div>
               ) : c.screens ? (
-                <div class="mock-screens">
+                <div class="mock-screens" role="img" aria-label={c.alt}>
                   {/* lista duplicada: a faixa anda até a metade e recomeça sem emenda */}
-                  <div class="mock-screens__track">
+                  <div class="mock-screens__track" aria-hidden="true">
                     {[...c.screens, ...c.screens].map((src) => (
                       <span class="mock-screens__phone">
                         <img src={`${src}.webp?v=1`} alt="" width="360" height="779" loading="lazy" decoding="async" />
