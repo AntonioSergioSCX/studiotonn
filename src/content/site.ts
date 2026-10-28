@@ -182,12 +182,13 @@ export const process = {
 };
 
 /* ── SERVIÇOS ────────────────────────────────────────────── */
-// Preço de entrada ("a partir de"); o valor final sai na proposta, conforme tamanho e complexidade.
+// Preços de entrada ("a partir de") guardados em `price`. Para exibir no site, mude `showPrices` para true.
 
 export const services = {
   eyebrow: 'Serviços',
   title: 'O que eu *construo* para você.',
-  lead: 'Cada projeto tem um tamanho. Os valores abaixo são o ponto de partida: na primeira conversa eu entendo o que você precisa e, em até 2 dias, você recebe uma proposta com preço fechado.',
+  lead: 'Cada projeto tem um tamanho. Na primeira conversa eu entendo o que você precisa e, em até 2 dias, você recebe uma proposta com preço fechado.',
+  showPrices: false,
   pricePrefix: 'a partir de',
   featuredBadge: 'Mais pedido',
   cta: 'Pedir orçamento',
@@ -198,17 +199,8 @@ export const services = {
       priceNote: 'Landing page. Mais páginas ou integrações, sob proposta.',
       desc: 'Para o seu negócio aparecer no Google e transformar visita em conversa no WhatsApp.',
       time: 'No ar em até 1 semana',
-      features: ['Landing page ou site completo', 'WhatsApp, mapa e agendamento', 'Pronto para aparecer no Google', 'Domínio e hospedagem configurados'],
+      features: ['Página única ou site completo', 'WhatsApp, mapa e agendamento', 'Pronto para aparecer no Google', 'Domínio e hospedagem configurados'],
       featured: true,
-    },
-    {
-      name: 'Sistema',
-      price: 2000,
-      priceNote: 'MVP enxuto. Cresce conforme o tamanho do sistema.',
-      desc: 'Um painel sob medida para organizar agenda, clientes, estoque e financeiro num lugar só.',
-      time: 'MVP em ~2 semanas',
-      features: ['Acesso pelo navegador, de onde estiver', 'Feito para o jeito que sua empresa trabalha', 'Acessos separados para a equipe', 'Relatórios para decidir com clareza'],
-      featured: false,
     },
     {
       name: 'Aplicativo',
@@ -217,6 +209,15 @@ export const services = {
       desc: 'Um app no celular dos seus clientes para agendar, comprar ou acompanhar pedidos.',
       time: 'MVP em ~1 a 3 semanas',
       features: ['iPhone e Android', 'Pagamentos e notificações', 'Publicação na App Store e Google Play', 'Acompanhamento depois do lançamento'],
+      featured: false,
+    },
+    {
+      name: 'Sistema',
+      price: 2000,
+      priceNote: 'MVP enxuto. Cresce conforme o tamanho do sistema.',
+      desc: 'Um painel sob medida para organizar agenda, clientes, estoque e financeiro num lugar só.',
+      time: 'MVP em ~2 semanas',
+      features: ['Acesso pelo navegador, de onde estiver', 'Feito para o jeito que sua empresa trabalha', 'Acessos separados para a equipe', 'Relatórios para decidir com clareza'],
       featured: false,
     },
   ],
@@ -264,7 +265,7 @@ export const faq = {
     },
     {
       q: 'Quanto custa?',
-      a: 'Sites (landing page) a partir de R$ 700, sistemas a partir de R$ 2.000 e aplicativos a partir de R$ 2.700. O valor final depende do tamanho e da complexidade: na primeira conversa, sem custo, eu entendo o que você precisa e em até 2 dias envio uma proposta com preço fechado. O valor combinado é o valor final.',
+      a: 'Depende do tamanho do projeto. Na primeira conversa, sem custo, eu entendo o que você precisa e em até 2 dias envio uma proposta com preço fechado. O valor combinado é o valor final.',
     },
     {
       q: 'Quanto tempo leva para ficar pronto?',

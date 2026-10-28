@@ -24,11 +24,15 @@ import { services, site, whatsappLink, brl } from '../content/site';
             {item.featured && <span class="plan__badge">{services.featuredBadge}</span>}
           </div>
           <h3 class="plan__name">{item.name}</h3>
-          <p class="plan__price">
-            <span class="plan__from">{services.pricePrefix}</span>
-            <strong>{brl(item.price)}</strong>
-          </p>
-          <p class="plan__note">{item.priceNote}</p>
+          {services.showPrices && (
+            <>
+              <p class="plan__price">
+                <span class="plan__from">{services.pricePrefix}</span>
+                <strong>{brl(item.price)}</strong>
+              </p>
+              <p class="plan__note">{item.priceNote}</p>
+            </>
+          )}
           <p class="plan__desc">{item.desc}</p>
           <p class="plan__time"><Icon name="clock" size={15} />{item.time}</p>
           <ul class="plan__features" role="list">

@@ -21,7 +21,7 @@ ${site.social.map((s) => `- ${s.network}: ${s.href}`).join('\n')}
 
 ## Serviços
 
-${services.items.map((s) => `- **${s.name}** (${services.pricePrefix} ${brl(s.price)}; ${s.time}): ${s.desc} ${s.priceNote} Inclui: ${s.features.join('; ')}.`).join('\n')}
+${services.items.map((s) => `- **${s.name}** (${services.showPrices ? `${services.pricePrefix} ${brl(s.price)}; ` : ''}${s.time}): ${s.desc}${services.showPrices ? ` ${s.priceNote}` : ''} Inclui: ${s.features.join('; ')}.`).join('\n')}
 
 Garantias: ${services.guarantees.map((g) => `${g.title} (${g.text.replace(/\.$/, '')})`).join('; ')}.
 
