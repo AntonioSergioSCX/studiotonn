@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { site, seo, hero, services, process, faq, cases, citiesLabel } from '../content/site';
+import { site, seo, hero, services, process, faq, cases, citiesLabel, brl } from '../content/site';
 
 // Resumo do site em texto simples para assistentes de IA (padrão llms.txt).
 // Sai do mesmo conteúdo da página, então fica sempre igual ao site.
@@ -21,7 +21,7 @@ ${site.social.map((s) => `- ${s.network}: ${s.href}`).join('\n')}
 
 ## Serviços
 
-${services.items.map((s) => `- **${s.name}** (${s.time}): ${s.desc} Inclui: ${s.features.join('; ')}.`).join('\n')}
+${services.items.map((s) => `- **${s.name}** (${services.pricePrefix} ${brl(s.price)}; ${s.time}): ${s.desc} ${s.priceNote} Inclui: ${s.features.join('; ')}.`).join('\n')}
 
 Garantias: ${services.guarantees.map((g) => `${g.title} (${g.text.replace(/\.$/, '')})`).join('; ')}.
 

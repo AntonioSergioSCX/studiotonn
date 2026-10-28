@@ -3,7 +3,7 @@ import SectionHead from './ui/SectionHead.astro';
 import Button from './ui/Button.astro';
 import Icon from './ui/Icon.astro';
 import Aurora from './ui/Aurora.astro';
-import { services, site, whatsappLink } from '../content/site';
+import { services, site, whatsappLink, brl } from '../content/site';
 ---
 
 <section class="section services" id="servicos" aria-labelledby="servicos-title">
@@ -24,6 +24,11 @@ import { services, site, whatsappLink } from '../content/site';
             {item.featured && <span class="plan__badge">{services.featuredBadge}</span>}
           </div>
           <h3 class="plan__name">{item.name}</h3>
+          <p class="plan__price">
+            <span class="plan__from">{services.pricePrefix}</span>
+            <strong>{brl(item.price)}</strong>
+          </p>
+          <p class="plan__note">{item.priceNote}</p>
           <p class="plan__desc">{item.desc}</p>
           <p class="plan__time"><Icon name="clock" size={15} />{item.time}</p>
           <ul class="plan__features" role="list">
@@ -115,7 +120,27 @@ import { services, site, whatsappLink } from '../content/site';
     line-height: 1;
     letter-spacing: var(--ls-display);
   }
-  .plan__desc { margin-top: 12px; color: var(--c-ink-soft); min-height: 3.2em; }
+  .plan__price {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 10px;
+    margin-top: 20px;
+  }
+  .plan__from {
+    font-family: var(--f-mono);
+    font-size: var(--t-xs);
+    letter-spacing: 0;
+    color: var(--c-ink-soft);
+  }
+  .plan__price strong {
+    font-size: clamp(1.6rem, 1.3rem + 0.8vw, 2rem);
+    font-weight: var(--w-bold);
+    line-height: 1;
+    letter-spacing: var(--ls-title);
+  }
+  .plan__note { margin-top: 6px; font-size: var(--t-xs); color: var(--c-ink-soft); }
+  .plan__desc { margin-top: 16px; color: var(--c-ink-soft); min-height: 3.2em; }
   .plan__time {
     display: inline-flex;
     align-items: center;
@@ -127,6 +152,8 @@ import { services, site, whatsappLink } from '../content/site';
     color: var(--c-ink-soft);
   }
   .plan--featured .plan__index,
+  .plan--featured .plan__from,
+  .plan--featured .plan__note,
   .plan--featured .plan__desc,
   .plan--featured .plan__time { color: var(--c-on-dark-soft); }
 
