@@ -21,23 +21,20 @@ export const site = {
   social: [
     { label: '@studio.tonn', network: 'Instagram', href: 'https://www.instagram.com/studio.tonn/' },
   ],
-  /* Atendimento presencial nestas cidades (SEO local) e online no resto do país. */
+  /*
+   * Região: só para o Google (título, descrição e dados estruturados).
+   * O texto visível do site e a prévia de link (Instagram, WhatsApp) não citam cidades.
+   */
   region: {
-    name: 'Sul Fluminense', // nome da região como aparece nos textos
+    name: 'Sul Fluminense',
     state: 'RJ',
     cities: ['Volta Redonda', 'Barra Mansa', 'Barra do Piraí', 'Vassouras'],
   },
-  serviceArea: 'todo o Brasil',
+  serviceArea: 'qualquer cidade',
   country: 'Brasil',
   responseTime: 'até 24h',
   cnpj: '', // opcional: '00.000.000/0001-00'
 };
-
-/** "A, B, C e D" */
-const listPt = (items: string[]) =>
-  items.length > 1 ? `${items.slice(0, -1).join(', ')} e ${items.at(-1)}` : items.join('');
-
-export const citiesLabel = listPt(site.region.cities);
 
 /** 700 → "R$ 700", 2700 → "R$ 2.700" */
 export const brl = (value: number) => `R$ ${value.toLocaleString('pt-BR')}`;
@@ -47,9 +44,19 @@ export const whatsappLink = (
   message = `Oi, ${site.owner}! Vim pelo site do Studio Tonn e quero um orçamento.`,
 ) => `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(message)}`;
 
+/** "A, B, C e D" */
+const listPt = (items: string[]) =>
+  items.length > 1 ? `${items.slice(0, -1).join(', ')} e ${items.at(-1)}` : items.join('');
+
+export const citiesLabel = listPt(site.region.cities);
+
 export const seo = {
+  // Resultado do Google: com a região
   title: `Sites e apps em ${site.region.cities[0]} e ${site.region.name} | Studio Tonn`,
-  description: `Sites e apps para clínicas, lojas, academias, escritórios e empresas de produto digital. Preço fechado, site no ar em até 1 semana. Atendimento presencial em ${citiesLabel} (${site.region.state}) e online em ${site.serviceArea}.`,
+  description: `Sites e apps para clínicas, lojas, academias, escritórios e empresas de produto digital. Preço fechado, site no ar em até 1 semana. Atendimento em ${citiesLabel} (${site.region.state}) e online para qualquer cidade.`,
+  // Prévia do link (Instagram, WhatsApp, redes): neutra, sem cidade
+  shareTitle: 'Sites, apps e sistemas que trazem clientes | Studio Tonn',
+  shareDescription: 'Design e desenvolvimento de sites, aplicativos e sistemas para o seu negócio. Preço fechado, site no ar em até 1 semana e atendimento online.',
   ogImage: '/og.png',
 };
 
@@ -161,7 +168,7 @@ export const process = {
     {
       icon: '/icons/passo-conversa.webp?v=2',
       title: 'Conversa de 30 minutos',
-      text: 'Presencial ou por vídeo, como for melhor para você. Você me conta do seu negócio. Sem custo e sem compromisso.',
+      text: 'Por vídeo ou WhatsApp, como for melhor para você. Você me conta do seu negócio. Sem custo e sem compromisso.',
     },
     {
       icon: '/icons/passo-proposta.webp?v=2',
@@ -247,7 +254,7 @@ export const about = {
   testimonial: {
     quote: 'Em um mês o site já estava no ar e o telefone parou de tocar só para perguntar preço. Agora o cliente chega decidido.',
     author: 'Allana Santos',
-    business: 'CompactArq, Viçosa – MG',
+    business: 'CompactArq',
   },
 };
 
@@ -277,7 +284,7 @@ export const faq = {
     },
     {
       q: 'Você atende a minha cidade?',
-      a: `Atendo presencialmente em ${citiesLabel}, no ${site.region.name}. Para empresas de outras cidades, o atendimento é online, por vídeo e WhatsApp, com o mesmo cuidado e o mesmo prazo.`,
+      a: 'Sim. O atendimento é todo online, por vídeo e WhatsApp, então atendo negócios de qualquer cidade com o mesmo cuidado e o mesmo prazo.',
     },
     {
       q: 'Como funciona o pagamento?',
@@ -298,5 +305,5 @@ export const finalCta = {
 
 export const footer = {
   tagline: 'Sites e apps que trazem clientes.',
-  regionText: `Presencial em ${citiesLabel} (${site.region.state}). Online em ${site.serviceArea}.`,
+  regionText: 'Atendimento online, para negócios de qualquer cidade.',
 };

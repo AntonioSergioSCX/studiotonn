@@ -14,7 +14,7 @@ ${hero.lead}
 
 - Responsável: ${site.ownerFullName || site.owner}, ${site.role}, ${site.years} anos criando produtos digitais
 - Atendimento presencial: ${citiesLabel} (${site.region.name}, ${site.region.state})
-- Atendimento online: ${site.serviceArea}
+- Atendimento online: ${site.serviceArea}, por vídeo e WhatsApp
 - WhatsApp: ${site.phoneDisplay} (https://wa.me/${site.whatsapp})
 - E-mail: ${site.email}
 ${site.social.map((s) => `- ${s.network}: ${s.href}`).join('\n')}
