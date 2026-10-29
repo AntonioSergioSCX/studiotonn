@@ -22,6 +22,12 @@ export const site = {
     { label: '@studio.tonn', network: 'Instagram', href: 'https://www.instagram.com/studio.tonn/' },
   ],
   /*
+   * Outros perfis que provam que o negócio existe (Google e IAs cruzam essas informações).
+   * Não aparecem no site. ⚠ EDITAR: cole aqui o link do Perfil da Empresa no Google
+   * (Compartilhar → copiar link) e o seu LinkedIn quando tiver.
+   */
+  profiles: [] as string[],
+  /*
    * Região: só para o Google (título, descrição e dados estruturados).
    * O texto visível do site e a prévia de link (Instagram, WhatsApp) não citam cidades.
    */
@@ -52,7 +58,7 @@ export const citiesLabel = listPt(site.region.cities);
 
 export const seo = {
   // Resultado do Google: com a região
-  title: `Sites e apps em ${site.region.cities[0]} e ${site.region.name} | Studio Tonn`,
+  title: `Criação de Sites e Apps em ${site.region.cities[0]} | Studio Tonn`,
   description: `Sites e apps para clínicas, lojas, academias, escritórios e empresas de produto digital. Preço fechado, site no ar em até 1 semana. Atendimento em ${citiesLabel} (${site.region.state}) e online para qualquer cidade.`,
   // Prévia do link (Instagram, WhatsApp, redes): neutra, sem cidade
   shareTitle: 'Sites, apps e sistemas que trazem clientes | Studio Tonn',

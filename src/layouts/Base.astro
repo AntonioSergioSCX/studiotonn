@@ -1,13 +1,15 @@
 ---
 import '../styles/tokens.css';
 import '../styles/global.css';
-import { site, seo, faq, services } from '../content/site';
+import { site, seo, faq, services, about } from '../content/site';
 
 const { region } = site;
 const state = { '@type': 'State', name: 'Rio de Janeiro', identifier: `BR-${region.state}` }; // ajuste se mudar de estado
 
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(seo.ogImage, site.url).href;
+const sameAs = [...site.social.map((s) => s.href), ...site.profiles];
+const updated = new Date().toISOString().slice(0, 10);
 
 
 /* Dados estruturados: negócio local (presencial na região, online no Brasil) + serviços + perguntas frequentes */
@@ -39,9 +41,12 @@ const jsonLd = {
         serviceUrl: site.url,
         availableLanguage: 'pt-BR',
       },
-      founder: { '@type': 'Person', name: site.ownerFullName || site.owner, jobTitle: site.role },
+      founder: { '@id': `${site.url}/#antonio` },
+      priceRange: '$$',
+      slogan: seo.shareTitle.split(' | ')[0],
+      knowsAbout: ['Criação de sites', 'Landing pages', 'Desenvolvimento de aplicativos', 'Sistemas web', 'Design de interfaces', 'SEO'],
       knowsLanguage: 'pt-BR',
-      sameAs: site.social.map((s) => s.href),
+      sameAs,
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
         name: 'Sites e apps',
@@ -53,6 +58,29 @@ const jsonLd = {
           }),
         })),
       },
+    },
+    {
+      // Quem faz: ajuda o Google e as IAs a ligar o negócio a uma pessoa real
+      '@type': 'Person',
+      '@id': `${site.url}/#antonio`,
+      name: site.ownerFullName || site.owner,
+      jobTitle: site.role,
+      image: new URL(about.photo.split('?')[0], site.url).href,
+      worksFor: { '@id': `${site.url}/#negocio` },
+      knowsAbout: ['Design de produto', 'Desenvolvimento web', 'Aplicativos', 'UX/UI'],
+      sameAs,
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${site.url}/#pagina`,
+      url: canonical,
+      name: seo.title,
+      description: seo.description,
+      inLanguage: 'pt-BR',
+      isPartOf: { '@id': `${site.url}/#site` },
+      about: { '@id': `${site.url}/#negocio` },
+      primaryImageOfPage: ogImage,
+      dateModified: updated,
     },
     {
       '@type': 'WebSite',
@@ -82,6 +110,7 @@ const jsonLd = {
     <title>{seo.title}</title>
     <meta name="description" content={seo.description} />
     <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <meta name="theme-color" content="#f5f4ef" />
     <meta name="geo.region" content={`BR-${region.state}`} />
     <meta name="geo.placename" content={region.cities.join(', ')} />
