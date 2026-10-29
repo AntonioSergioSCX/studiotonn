@@ -127,7 +127,7 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: no-preference) {
   /* Hero: entra ao carregar, sem depender de JS */
   .split--load .w > span {
-    animation: word-in 0.9s var(--ease-out) both;
+    animation: word-in 0.9s var(--ease-out) backwards;
     animation-delay: calc(120ms + var(--w) * 60ms);
   }
   .hero-in {

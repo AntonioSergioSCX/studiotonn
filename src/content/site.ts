@@ -71,25 +71,9 @@ export const nav = [
 /* ── HERO ─────────────────────────────────────────────────── */
 
 export const hero = {
-  /* Selo acima do título: fotos de clientes passando de lado + frase curta.
-     ⚠ EDITAR: troque as iniciais por fotos (`photo: '/images/clientes/nome.webp'`). */
-  badge: {
-    count: '+14',
-    text: 'clientes atendidos',
-    avatars: [
-      { initials: 'CA', bg: '#e9e1d4', color: '#2d2520' },
-      { initials: 'OL', bg: '#f1dfd2', color: '#9c5232' },
-      { initials: 'CO', bg: '#1b1c1b', color: '#f5f4ef' },
-      { initials: 'AS', bg: '#dcefd5', color: '#2d7a1b' },
-      { initials: 'MV', bg: '#e3e8ef', color: '#23345c' },
-      { initials: 'LP', bg: '#f3e9c9', color: '#7a5a12' },
-      { initials: 'RB', bg: '#e4e1f6', color: '#4b3bb5' },
-      { initials: 'JT', bg: '#d9eeea', color: '#1f6b5f' },
-    ] as { initials: string; bg: string; color: string; photo?: string }[],
-  },
   titleLines: ['Sites que trazem', '*clientes* para'],
   /* Ícones 3D pequenos no meio do título, logo depois da palavra indicada */
-  titleIcons: { Sites: '/icons/passo-construo', clientes: '/icons/passo-conversa' } as Record<string, string>,
+  titleIcons: { Sites: '/icons/hero-site', clientes: '/icons/hero-dinheiro' } as Record<string, string>,
   fallbackPhrase: 'o seu negócio',
   lead: 'Eu desenho e construo o site, o aplicativo ou o sistema do seu negócio, do começo ao fim. Você fala direto com quem faz e recebe preço fechado antes de começar.',
   cta: 'Quero meu orçamento',
