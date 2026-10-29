@@ -72,9 +72,10 @@ export const nav = [
 
 export const hero = {
   /* Selo acima do título: fotos de clientes passando de lado + frase curta.
-     ⚠ EDITAR: troque as iniciais por fotos (`photo: '/images/clientes/nome.webp'`) e a frase por "+N clientes atendidos". */
+     ⚠ EDITAR: troque as iniciais por fotos (`photo: '/images/clientes/nome.webp'`). */
   badge: {
-    text: 'Negócios que já estão no ar',
+    count: '+14',
+    text: 'clientes atendidos',
     avatars: [
       { initials: 'CA', bg: '#e9e1d4', color: '#2d2520' },
       { initials: 'OL', bg: '#f1dfd2', color: '#9c5232' },
