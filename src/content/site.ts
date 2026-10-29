@@ -164,8 +164,10 @@ export const cases = {
 /* ── COMO FUNCIONA ────────────────────────────────────────── */
 
 export const process = {
+  /* Seção escura com textura de pontos em movimento; cada passo mostra o quanto do caminho já foi feito */
   eyebrow: 'Como funciona',
   title: 'Simples do *primeiro oi* ao site no ar.',
+  lead: 'Quatro passos, um de cada vez. Você sabe sempre em que ponto o projeto está e o que vem depois.',
   steps: [
     {
       icon: '/icons/passo-conversa.webp?v=2',
@@ -186,6 +188,7 @@ export const process = {
       icon: '/icons/passo-no-ar.webp?v=2',
       title: 'No ar e no Google',
       text: 'Publico, cadastro no Google e fico 30 dias ajustando o que precisar, sem custo extra.',
+      badge: '30 dias de ajustes inclusos',
     },
   ],
 };
