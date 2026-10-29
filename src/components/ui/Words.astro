@@ -1,0 +1,21 @@
+---
+/**
+ * Texto de título palavra a palavra, para a animação de entrada (.split em global.css).
+ * `from` continua a contagem do atraso quando um título tem várias linhas.
+ */
+import { splitWords } from '../../lib/format';
+
+interface Props {
+  text: string;
+  from?: number;
+}
+const { text, from = 0 } = Astro.props;
+const words = splitWords(text);
+---
+
+{words.map((parts, i) => (
+  <>
+    {i > 0 && ' '}
+    <span class="w" style={`--w:${from + i}`}><span>{parts.map((p) => (p.accent ? <span class="accent">{p.text}</span> : p.text))}</span></span>
+  </>
+))}

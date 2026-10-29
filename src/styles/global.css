@@ -115,6 +115,39 @@ p { text-wrap: pretty; }
   .js [data-reveal].is-in { opacity: 1; transform: none; }
 }
 
+/* Títulos palavra a palavra (ui/Words.astro): sobem desfocando para o nítido */
+.split .w,
+.split .w > span { display: inline-block; }
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.4em); filter: blur(10px); }
+}
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(16px); filter: blur(6px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero: entra ao carregar, sem depender de JS */
+  .split--load .w > span {
+    animation: word-in 0.9s var(--ease-out) both;
+    animation-delay: calc(120ms + var(--w) * 60ms);
+  }
+  .hero-in {
+    animation: rise-in 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--d) * 90ms);
+  }
+  /* Demais títulos: entram quando aparecem na tela */
+  .js .split--scroll .w > span {
+    opacity: 0;
+    transform: translateY(0.4em);
+    filter: blur(10px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.9s var(--ease-out),
+      filter 0.8s var(--ease-out);
+    transition-delay: calc(var(--w) * 45ms);
+  }
+  .js .split--scroll.is-in .w > span { opacity: 1; transform: none; filter: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

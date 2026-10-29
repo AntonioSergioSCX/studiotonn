@@ -1,5 +1,5 @@
 ---
-import { splitAccent } from '../../lib/format';
+import Words from './Words.astro';
 
 interface Props {
   index: string;
@@ -17,8 +17,8 @@ const { index, eyebrow, title, lead, id } = Astro.props;
     <span class="sh__sep" aria-hidden="true">/</span>
     {eyebrow}
   </p>
-  <h2 class="sh__title" id={id} data-reveal style="--i:1">
-    {splitAccent(title).map((part, i) => (i % 2 ? <span class="accent">{part}</span> : part))}
+  <h2 class="sh__title split split--scroll" id={id} data-split>
+    <Words text={title} />
   </h2>
   {lead && <p class="sh__lead" data-reveal style="--i:2">{lead}</p>}
   <slot />

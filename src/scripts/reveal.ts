@@ -1,5 +1,5 @@
-/* Mostra os elementos [data-reveal] quando entram na tela. */
-const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+/* Mostra os elementos [data-reveal] e os títulos [data-split] quando entram na tela. */
+const items = document.querySelectorAll<HTMLElement>('[data-reveal], [data-split]');
 
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(

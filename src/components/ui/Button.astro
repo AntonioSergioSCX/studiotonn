@@ -14,10 +14,15 @@ interface Props {
 
 const { href, variant = 'primary', size = 'md', icon = 'arrow', external = false, class: className, ...rest } = Astro.props;
 const ext = external ? { target: '_blank', rel: 'noopener' } : {};
+// O texto aparece duas vezes: no hover a cópia de baixo sobe no lugar da de cima
+const label = await Astro.slots.render('default');
 ---
 
 <a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, { 'btn--still': icon !== 'arrow' }, className]} {...ext} {...rest}>
-  <span class="btn__label"><slot /></span>
+  <span class="btn__label">
+    <span class="btn__text" set:html={label} />
+    <span class="btn__text btn__text--next" aria-hidden="true" set:html={label} />
+  </span>
   <span class="btn__icon"><Icon name={icon} size={18} /></span>
 </a>
 
@@ -46,6 +51,30 @@ const ext = external ? { target: '_blank', rel: 'noopener' } : {};
   }
   .btn--lg { --h: 58px; font-size: var(--t-md); padding-left: 26px; }
 
+  /* Texto que rola para cima no hover */
+  .btn__label {
+    position: relative;
+    display: grid;
+    overflow: hidden;
+    padding-block: 0.15em;
+  }
+  .btn__text {
+    grid-area: 1 / 1;
+    transition: transform 0.55s var(--ease-out);
+  }
+  .btn__text--next { transform: translateY(115%); }
+
+  /* Faixa de brilho que atravessa o botão no hover */
+  .btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.45) 50%, transparent 65%);
+    transform: translateX(-110%);
+    pointer-events: none;
+  }
+
   .btn__icon {
     display: grid;
     place-items: center;
@@ -55,6 +84,14 @@ const ext = external ? { target: '_blank', rel: 'noopener' } : {};
     transition: transform var(--d-med) var(--ease-spring), background-color var(--d-fast) ease;
   }
   .btn:hover { transform: translateY(-2px); }
+  @media (hover: hover) {
+    .btn:hover .btn__text { transform: translateY(-115%); }
+    .btn:hover .btn__text--next { transform: none; }
+    .btn:hover::after { transform: translateX(110%); transition: transform 0.9s var(--ease-out); }
+  }
+  .btn--dark::after, .btn--light::after { opacity: 0.4; }
+  .btn:focus-visible .btn__text { transform: translateY(-115%); }
+  .btn:focus-visible .btn__text--next { transform: none; }
   .btn:hover .btn__icon { transform: rotate(-45deg); }
   .btn:active { transform: translateY(0) scale(0.98); }
   .btn--still:hover .btn__icon { transform: scale(1.08); }

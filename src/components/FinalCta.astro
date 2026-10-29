@@ -3,7 +3,7 @@ import Button from './ui/Button.astro';
 import Icon from './ui/Icon.astro';
 import Aurora from './ui/Aurora.astro';
 import { finalCta, whatsappLink } from '../content/site';
-import { splitAccent } from '../lib/format';
+import Words from './ui/Words.astro';
 ---
 
 <section class="final" id="contato" aria-labelledby="contato-title">
@@ -11,8 +11,8 @@ import { splitAccent } from '../lib/format';
     <div class="final__card on-dark">
       <Aurora />
       <p class="final__kicker" data-reveal>{finalCta.kicker}</p>
-      <h2 class="final__title" id="contato-title" data-reveal style="--i:1">
-        {splitAccent(finalCta.title).map((part, i) => (i % 2 ? <span class="accent">{part}</span> : part))}
+      <h2 class="final__title split split--scroll" id="contato-title" data-split>
+        <Words text={finalCta.title} />
       </h2>
       <p class="final__text" data-reveal style="--i:2">{finalCta.text}</p>
       <div class="final__ctas" data-reveal style="--i:3">
