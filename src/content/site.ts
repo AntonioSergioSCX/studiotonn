@@ -88,6 +88,8 @@ export const hero = {
     ] as { initials: string; bg: string; color: string; photo?: string }[],
   },
   titleLines: ['Sites que trazem', '*clientes* para'],
+  /* Ícones 3D pequenos no meio do título, logo depois da palavra indicada */
+  titleIcons: { Sites: '/icons/passo-construo', clientes: '/icons/passo-conversa' } as Record<string, string>,
   fallbackPhrase: 'o seu negócio',
   lead: 'Eu desenho e construo o site, o aplicativo ou o sistema do seu negócio, do começo ao fim. Você fala direto com quem faz e recebe preço fechado antes de começar.',
   cta: 'Quero meu orçamento',

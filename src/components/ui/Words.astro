@@ -8,14 +8,24 @@ import { splitWords } from '../../lib/format';
 interface Props {
   text: string;
   from?: number;
+  /** palavra → ícone (caminho sem .webp) que aparece logo depois dela */
+  icons?: Record<string, string>;
 }
-const { text, from = 0 } = Astro.props;
-const words = splitWords(text);
+const { text, from = 0, icons = {} } = Astro.props;
+const words = splitWords(text).map((parts) => ({ parts, icon: icons[parts.map((p) => p.text).join('')] }));
 ---
 
-{words.map((parts, i) => (
+{words.map(({ parts, icon }, i) => (
   <>
     {i > 0 && ' '}
     <span class="w" style={`--w:${from + i}`}><span>{parts.map((p) => (p.accent ? <span class="accent">{p.text}</span> : p.text))}</span></span>
+    {icon && (
+      <>
+        {' '}
+        <span class="w w--icon" style={`--w:${from + i + 0.5}`} aria-hidden="true"><span>
+          <img src={`${icon}.webp?v=2`} srcset={`${icon}.webp?v=2 1x, ${icon}@2x.webp?v=2 2x`} alt="" width="112" height="112" />
+        </span></span>
+      </>
+    )}
   </>
 ))}
