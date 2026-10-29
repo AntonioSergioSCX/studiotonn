@@ -20,7 +20,8 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
         <span class="hero__dots"></span>
         <span class="hero__streak hero__streak--l"></span>
         <span class="hero__streak hero__streak--r"></span>
-        <span class="hero__horizon"></span>
+        <span class="hero__arc hero__arc--1"></span>
+        <span class="hero__arc hero__arc--2"></span>
       </div>
 
       <h1 class="hero__title split split--load" id="hero-title">
@@ -85,7 +86,7 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: clamp(56px, 8vw, 96px) clamp(16px, 4vw, 48px) clamp(28px, 4vw, 48px);
+    padding: clamp(56px, 8vw, 96px) clamp(16px, 4vw, 48px) 0;
     border-radius: var(--r-xl);
     background:
       radial-gradient(70% 55% at 50% 0%, rgb(94 204 66 / 0.16), transparent 70%),
@@ -124,17 +125,23 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
   .hero__streak--r { right: -24%; transform: rotate(-28deg); animation: streak-r 16s var(--ease-in-out) infinite alternate; }
   @keyframes streak-l { to { transform: rotate(22deg) translate(6%, 10%) scale(1.1); } }
   @keyframes streak-r { to { transform: rotate(-22deg) translate(-6%, 12%) scale(1.08); } }
-  /* Horizonte de vidro atrás dos cases: translúcido, sem contorno colorido */
-  .hero__horizon {
-    left: -12%;
-    right: -12%;
-    bottom: -62%;
-    height: 100%;
+  /* Dois arcos de vidro: um passando atrás do texto, outro logo acima dos cases.
+     Medidos a partir da base do bloco: altura dos cases + espaço acima deles. */
+  .hero__panel { --cases-h: calc(clamp(300px, 34vw, 430px) + clamp(48px, 6vw, 72px)); }
+  .hero__arc {
+    left: -15%;
+    right: -15%;
+    height: clamp(260px, 58vw, 760px);
     border-radius: 50%;
-    background: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.12) 30%, rgb(255 255 255 / 0) 60%);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9), 0 -30px 60px -40px rgb(255 255 255 / 0.9);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0.1) 22%, rgb(255 255 255 / 0) 45%);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95), 0 -24px 50px -36px rgb(255 255 255 / 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .hero__arc--2 { top: calc(100% - var(--cases-h) - 48px); }
+  .hero__arc--1 { top: calc(100% - var(--cases-h) - clamp(100px, 10vw, 145px)); left: -18%; right: -12%; }
+  @media (max-width: 759px) {
+    .hero__panel { --cases-h: calc(330px + clamp(48px, 6vw, 72px)); }
   }
 
   /* Ícones 3D no meio do título */
