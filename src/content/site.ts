@@ -4,7 +4,7 @@
  *  Todos os textos, preços e contatos ficam aqui.
  *
  *  ⚠ EDITAR  = dado provisório. Troque antes de publicar.
- *  Nos títulos, *palavra* vira o destaque em itálico verde.
+ *  Nos títulos, *palavra* vira o destaque verde. Use só no hero e no CTA final.
  * ─────────────────────────────────────────────────────────────
  */
 
@@ -83,11 +83,6 @@ export const hero = {
   fallbackPhrase: 'o seu negócio',
   lead: 'Eu desenho e construo o site, o aplicativo ou o sistema do seu negócio, do começo ao fim. Você fala direto com quem faz e recebe preço fechado antes de começar.',
   cta: 'Quero meu orçamento',
-  proof: [
-    { value: `${site.years} anos`, label: 'criando produtos digitais' },
-    { value: '1 pessoa', label: 'do desenho ao site no ar' },
-    { value: 'Preço fechado', label: 'antes de começar' },
-  ],
   /* O fim do título passa uma vez por cada tipo de negócio e para em "o seu negócio." */
   phrases: ['a sua clínica.', 'a sua loja.', 'a sua academia.', 'o seu escritório.', 'o seu produto.'],
 };
@@ -101,7 +96,7 @@ export const marquee = [
 
 export const results = {
   eyebrow: 'O que muda no seu negócio',
-  title: 'Feito para *vender*.',
+  title: 'Feito para vender.',
   lead: 'Site bonito que ninguém encontra não paga a conta. Cada detalhe é pensado para uma coisa: transformar quem visita em cliente.',
   // Imagens em public/images: <nome>.webp (480px) e <nome>@2x.webp (960px)
   items: [
@@ -172,7 +167,7 @@ export const cases = {
 export const process = {
   /* Seção escura com textura de pontos em movimento; cada passo mostra o quanto do caminho já foi feito */
   eyebrow: 'Como funciona',
-  title: 'Simples do *primeiro oi* ao site no ar.',
+  title: 'Simples do primeiro oi ao site no ar.',
   lead: 'Quatro passos, um de cada vez. Você sabe sempre em que ponto o projeto está e o que vem depois.',
   steps: [
     {
@@ -204,7 +199,7 @@ export const process = {
 
 export const services = {
   eyebrow: 'Serviços',
-  title: 'O que eu *construo* para você.',
+  title: 'O que eu construo para você.',
   lead: 'Cada projeto tem um tamanho. Na primeira conversa eu entendo o que você precisa e, em até 2 dias, você recebe uma proposta com preço fechado.',
   showPrices: false,
   pricePrefix: 'a partir de',
@@ -251,7 +246,7 @@ export const services = {
 
 export const about = {
   eyebrow: 'Quem faz',
-  title: 'Quem desenha é *quem constrói*.',
+  title: 'Quem desenha é quem constrói.',
   paragraphs: [
     `Oi, eu sou o ${site.owner}. Há ${site.years} anos crio produtos digitais, de sites para negócios do bairro a apps usados por milhares de pessoas.`,
     'Como eu desenho e também programo, nada se perde no caminho: o que você aprova é exatamente o que vai ao ar. E você fala sempre comigo, sem atendente, sem intermediário.',
@@ -273,7 +268,7 @@ export const about = {
 
 export const faq = {
   eyebrow: 'Dúvidas',
-  title: 'Perguntas que *todo mundo* faz.',
+  title: 'Perguntas que todo mundo faz.',
   aside: 'Não achou a sua?',
   asideCta: 'Pergunte no WhatsApp',
   items: [

@@ -43,11 +43,6 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
       <div class="hero__cases hero-in" style="--d:7"><CaseCarousel /></div>
     </div>
 
-    <ul class="hero__proof" role="list">
-      {hero.proof.map((item) => (
-        <li><strong>{item.value}</strong><span>{item.label}</span></li>
-      ))}
-    </ul>
   </div>
 </section>
 
@@ -77,7 +72,7 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
 </script>
 
 <style>
-  .hero { padding-top: 88px; }
+  .hero { padding-top: 88px; padding-bottom: clamp(28px, 4vw, 48px); }
 
   /* Bloco arredondado com luz verde suave, conteúdo centralizado */
   .hero__panel {
@@ -205,23 +200,4 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
   .hero__cta { margin-top: 36px; }
   .hero__cases { align-self: stretch; }
 
-  .hero__proof {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px 40px;
-    padding-block: 28px 24px;
-    font-size: var(--t-sm);
-    color: var(--c-ink-soft);
-  }
-  .hero__proof li { display: flex; align-items: baseline; gap: 8px; }
-  .hero__proof strong {
-    font-size: 1.125rem;
-    font-weight: var(--w-bold);
-    letter-spacing: var(--ls-title);
-    color: var(--c-ink);
-  }
-  @media (max-width: 559px) {
-    .hero__proof { flex-direction: column; align-items: center; gap: 6px; }
-  }
 </style>
