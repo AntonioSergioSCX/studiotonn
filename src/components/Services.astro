@@ -7,7 +7,7 @@ import { services, site, whatsappLink, brl } from '../content/site';
 
 <section class="section services" id="servicos" aria-labelledby="servicos-title">
   <div class="container">
-    <SectionHead index="003" eyebrow={services.eyebrow} title={services.title} lead={services.lead} id="servicos-title" />
+    <SectionHead eyebrow={services.eyebrow} title={services.title} lead={services.lead} id="servicos-title" />
 
     <ul class="plans snap-mobile" role="list" aria-label="Serviços">
       {services.items.map((item, i) => (
@@ -22,11 +22,9 @@ import { services, site, whatsappLink, brl } from '../content/site';
               <span class="plan__blob plan__blob--a"></span>
               <span class="plan__blob plan__blob--b"></span>
               <span class="plan__blob plan__blob--c"></span>
-              <span class="plan__grain"></span>
             </div>
           )}
           <div class="plan__top">
-            <span class="plan__index">{String(i + 1).padStart(2, '0')}</span>
             {item.featured && <span class="plan__badge">{services.featuredBadge}</span>}
           </div>
           <h3 class="plan__name">{item.name}</h3>
@@ -149,13 +147,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
     100% { transform: translate(-30%, 25%); }
   }
   /* trama de pontos fina por cima, como no CTA final */
-  .plan__grain {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle, rgb(215 255 200 / 0.28) 0 1px, transparent 1.6px) 0 0 / 12px 12px;
-    mask-image: linear-gradient(to top, #000, transparent 70%);
-    -webkit-mask-image: linear-gradient(to top, #000, transparent 70%);
-  }
 
   .plan--featured::before {
     content: '';
@@ -168,7 +159,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
 
   .plan__top { display: flex; align-items: center; justify-content: space-between; min-height: 28px; }
   .plan__index {
-    font-family: var(--f-mono);
     font-size: var(--t-xs);
     font-weight: var(--w-medium);
     color: var(--c-ink-soft);
@@ -178,7 +168,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
     border-radius: var(--r-pill);
     background: var(--c-green);
     color: var(--c-ink);
-    font-family: var(--f-mono);
     font-size: 0.75rem;
     font-weight: var(--w-semibold);
     letter-spacing: 0;
@@ -198,7 +187,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
     margin-top: 20px;
   }
   .plan__from {
-    font-family: var(--f-mono);
     font-size: var(--t-xs);
     letter-spacing: 0;
     color: var(--c-ink-soft);
@@ -216,7 +204,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
     align-items: center;
     gap: 8px;
     margin-top: 20px;
-    font-family: var(--f-mono);
     font-size: var(--t-xs);
     letter-spacing: 0;
     color: var(--c-ink-soft);
@@ -245,8 +232,9 @@ import { services, site, whatsappLink, brl } from '../content/site';
   .guarantees {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 16px;
+    gap: 24px 16px;
+    /* garantias são um grupo próprio: mais longe dos planos do que os planos entre si */
+    margin-top: clamp(40px, 5vw, 64px);
   }
   @media (min-width: 1100px) { .guarantees { grid-template-columns: repeat(4, 1fr); } }
   .guarantees li {
@@ -254,10 +242,7 @@ import { services, site, whatsappLink, brl } from '../content/site';
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    padding: 28px 18px 24px;
-    border-radius: var(--r-md);
-    background: var(--c-surface);
-    box-shadow: inset 0 0 0 1px var(--c-line);
+    padding: 0 8px;
     font-size: var(--t-sm);
     line-height: 1.45;
     text-align: center;
@@ -271,9 +256,9 @@ import { services, site, whatsappLink, brl } from '../content/site';
     filter: drop-shadow(0 10px 14px rgb(94 204 66 / 0.25));
     transition: transform var(--d-slow) var(--ease-spring);
   }
-  .guarantees li:hover .guarantees__icon { transform: translateY(-4px) rotate(-4deg) scale(1.06); }
+  .guarantees li:hover .guarantees__icon { transform: translateY(-4px) rotate(-4deg); }
   @media (max-width: 639px) {
-    .guarantees li { padding: 22px 12px 18px; font-size: var(--t-xs); }
+    .guarantees li { padding: 0 4px; font-size: var(--t-xs); }
     .guarantees__icon { width: 52px; height: 52px; }
   }
 </style>

@@ -11,10 +11,10 @@ import { about, site } from '../content/site';
       ) : (
         <div class="avatar__mono" role="img" aria-label={about.photoAlt}><span aria-hidden="true">A</span></div>
       )}
-      <figcaption class="avatar__tag"><strong>{site.owner}</strong> · {site.role}</figcaption>
+      <figcaption class="avatar__tag"><strong>{site.owner}</strong>, {site.role}</figcaption>
     </figure>
 
-    <SectionHead index="004" eyebrow={about.eyebrow} title={about.title} id="sobre-title" />
+    <SectionHead eyebrow={about.eyebrow} title={about.title} id="sobre-title" />
 
     <div class="about__copy">
       {about.paragraphs.map((p, i) => <p data-reveal style={`--i:${i}`}>{p}</p>)}
@@ -32,7 +32,7 @@ import { about, site } from '../content/site';
 
       <blockquote class="quote" data-reveal style="--i:1">
         <p>“{about.testimonial.quote}”</p>
-        <footer><strong>{about.testimonial.author}</strong> · {about.testimonial.business}</footer>
+        <footer><strong>{about.testimonial.author}</strong>, {about.testimonial.business}</footer>
       </blockquote>
     </div>
   </div>

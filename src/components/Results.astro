@@ -5,7 +5,7 @@ import { results } from '../content/site';
 
 <section class="section results" id="resultados" aria-labelledby="resultados-title">
   <div class="container">
-    <SectionHead index="001" eyebrow={results.eyebrow} title={results.title} lead={results.lead} id="resultados-title" />
+    <SectionHead eyebrow={results.eyebrow} title={results.title} lead={results.lead} id="resultados-title" />
 
     <ul class="results__grid snap-mobile" role="list" aria-label="Resultados">
       {results.items.map((item, i) => (
@@ -62,7 +62,7 @@ import { results } from '../content/site';
     object-fit: cover;
     transition: transform var(--d-slow) var(--ease-out);
   }
-  .card:hover .card__art img { transform: scale(1.04); }
+  .card:hover .card__art img { transform: translateY(-6px); }
   .card { text-align: center; }
   .card__title, .card__text { padding-inline: 14px; }
   .card__title {

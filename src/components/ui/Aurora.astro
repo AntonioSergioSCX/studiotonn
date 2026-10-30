@@ -1,15 +1,15 @@
 ---
 /**
- * Fundo escuro com luz verde subindo da base (faixas verticais + trama de pontos).
+ * Fundo escuro com luz verde subindo da base (faixas verticais).
  * Usado no CTA final e no card em destaque dos serviços. O pai precisa de
  * position: relative, isolation: isolate e overflow: hidden.
  */
 ---
 
-<div class="aurora" aria-hidden="true"><span class="aurora__light"></span><span class="aurora__dots"></span></div>
+<div class="aurora" aria-hidden="true"><span class="aurora__light"></span></div>
 
 <style>
-  /* Degradê em CSS puro: luz verde-limão subindo da base, faixas verticais e trama de pontos */
+  /* Degradê em CSS puro: luz verde-limão subindo da base e faixas verticais */
   .aurora {
     position: absolute;
     inset: 0;
@@ -20,8 +20,7 @@
     mask-image: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.6) 35%, transparent 70%);
     -webkit-mask-image: linear-gradient(to top, #000 0%, rgb(0 0 0 / 0.6) 35%, transparent 70%);
   }
-  .aurora__light,
-  .aurora__dots { position: absolute; inset: 0; }
+  .aurora__light { position: absolute; inset: 0; }
   .aurora__light {
     background:
       radial-gradient(42% 38% at 30% 108%, #b6f23a 0%, rgb(150 230 50 / 0.75) 28%, transparent 72%),
@@ -31,12 +30,6 @@
       radial-gradient(30% 40% at 96% 100%, rgb(30 105 25 / 0.6), transparent 70%);
     transform-origin: 50% 100%;
     animation: breathe 9s var(--ease-in-out) infinite alternate;
-  }
-  .aurora__dots {
-    background: radial-gradient(circle, rgb(215 255 200 / 0.45) 0 1px, transparent 1.6px) 0 0 / 12px 12px;
-    mask-image: radial-gradient(40% 55% at 50% 100%, #000 0%, rgb(0 0 0 / 0.5) 45%, transparent 80%);
-    -webkit-mask-image: radial-gradient(40% 55% at 50% 100%, #000 0%, rgb(0 0 0 / 0.5) 45%, transparent 80%);
-    opacity: 0.7;
   }
   @keyframes breathe {
     from { transform: scale(1, 0.94); opacity: 0.92; }

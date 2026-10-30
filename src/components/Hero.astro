@@ -17,7 +17,6 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
     <div class="hero__panel">
       <div class="hero__bg" aria-hidden="true">
         <span class="hero__beams"></span>
-        <span class="hero__dots"></span>
         <span class="hero__streak hero__streak--l"></span>
         <span class="hero__streak hero__streak--r"></span>
         <span class="hero__arc hero__arc--1"></span>
@@ -106,25 +105,15 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
     mask-image: radial-gradient(60% 90% at 50% 0%, #000 0%, transparent 75%);
     -webkit-mask-image: radial-gradient(60% 90% at 50% 0%, #000 0%, transparent 75%);
   }
-  .hero__dots {
-    inset: 0 0 50%;
-    background: radial-gradient(circle, rgb(13 15 13 / 0.14) 0 1px, transparent 1.4px) 0 0 / 14px 14px;
-    mask-image: radial-gradient(45% 70% at 50% 0%, transparent 30%, #000 60%, transparent 100%);
-    -webkit-mask-image: radial-gradient(45% 70% at 50% 0%, transparent 30%, #000 60%, transparent 100%);
-    opacity: 0.6;
-  }
   .hero__streak {
     top: 4%;
     width: 46%;
     height: 34%;
     border-radius: 50%;
     background: radial-gradient(closest-side, rgb(94 204 66 / 0.55), rgb(182 242 58 / 0.25) 55%, transparent 100%);
-    will-change: transform;
   }
-  .hero__streak--l { left: -24%; transform: rotate(28deg); animation: streak-l 14s var(--ease-in-out) infinite alternate; }
-  .hero__streak--r { right: -24%; transform: rotate(-28deg); animation: streak-r 16s var(--ease-in-out) infinite alternate; }
-  @keyframes streak-l { to { transform: rotate(22deg) translate(6%, 10%) scale(1.1); } }
-  @keyframes streak-r { to { transform: rotate(-22deg) translate(-6%, 12%) scale(1.08); } }
+  .hero__streak--l { left: -24%; transform: rotate(28deg); }
+  .hero__streak--r { right: -24%; transform: rotate(-28deg); }
   /* Dois arcos de vidro: um passando atrás do texto, outro logo acima dos cases.
      Medidos a partir da base do bloco: altura dos cases + espaço acima deles. */
   .hero__panel { --cases-h: calc(clamp(300px, 34vw, 430px) + clamp(48px, 6vw, 72px)); }
@@ -135,6 +124,7 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
     border-radius: 50%;
     background: linear-gradient(180deg, rgb(255 255 255 / 0.42), rgb(255 255 255 / 0.1) 22%, rgb(255 255 255 / 0) 45%);
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.95), 0 -24px 50px -36px rgb(255 255 255 / 0.9);
+    /* EXCEÇÃO ao noise/blur-on-card: o arco é absoluto e passa por cima dos feixes e das faixas verdes; o desfoque aparece neles */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }

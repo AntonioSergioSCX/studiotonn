@@ -101,7 +101,7 @@ export const marquee = [
 
 export const results = {
   eyebrow: 'O que muda no seu negócio',
-  title: 'Feito para *vender*, não só para ficar bonito.',
+  title: 'Feito para *vender*.',
   lead: 'Site bonito que ninguém encontra não paga a conta. Cada detalhe é pensado para uma coisa: transformar quem visita em cliente.',
   // Imagens em public/images: <nome>.webp (480px) e <nome>@2x.webp (960px)
   items: [
@@ -136,7 +136,7 @@ export const cases = {
   items: [
     {
       name: 'CompactArq',
-      type: 'Site · Arquitetura',
+      type: 'Site de arquitetura',
       result: 'Mais agendamentos',
       image: '/images/cases/compactarq',
       alt: 'Página inicial do site da CompactArq, escritório de arquitetura para pequenos negócios',
@@ -146,7 +146,7 @@ export const cases = {
     },
     {
       name: 'Olaria',
-      type: 'Site · Cerâmica artesanal',
+      type: 'Site de cerâmica artesanal',
       result: 'Mais visibilidade',
       image: '/images/cases/olaria',
       alt: 'Página inicial do site da Olaria, marca de cerâmica artesanal brasileira',
@@ -156,7 +156,7 @@ export const cases = {
     },
     {
       name: 'Constância',
-      type: 'App · Hábitos',
+      type: 'App de hábitos',
       result: 'Otimização interna',
       screens: ['/images/cases/constancia-1', '/images/cases/constancia-2', '/images/cases/constancia-3', '/images/cases/constancia-4'],
       alt: 'Telas do app Constância: progresso em quadradinhos, lista de hábitos e cadastro de novo hábito',
@@ -311,7 +311,7 @@ export const finalCta = {
   title: 'Vamos colocar o seu negócio *no mapa*.',
   text: `Me chama no WhatsApp e em ${site.responseTime} você tem uma ideia clara de preço e prazo. Sem compromisso.`,
   cta: 'Chamar no WhatsApp',
-  reassurance: 'Primeira conversa sem custo · Preço fechado',
+  reassurance: 'Primeira conversa sem custo e preço fechado',
 };
 
 export const footer = {

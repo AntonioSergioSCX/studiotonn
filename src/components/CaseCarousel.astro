@@ -79,10 +79,10 @@ const total = cases.items.length;
     })}
 
     <button type="button" class="cases__arrow cases__arrow--prev" data-prev aria-label="Case anterior">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6" /></svg>
+      <Icon name="caret-left" size={20} />
     </button>
     <button type="button" class="cases__arrow cases__arrow--next" data-next aria-label="Próximo case">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 6 6 6-6 6" /></svg>
+      <Icon name="caret-right" size={20} />
     </button>
   </div>
 </div>
@@ -232,9 +232,7 @@ const total = cases.items.length;
     line-height: 1.2;
   }
   .case__type {
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0;
+    font-size: var(--t-xs);
     color: var(--c-ink-soft);
   }
   .case__result {
@@ -279,9 +277,9 @@ const total = cases.items.length;
   .cases__arrow--prev { left: calc(50% - var(--w) / 2); }
   .cases__arrow--next { left: calc(50% + var(--w) / 2); }
   @media (hover: hover) {
-    .cases__arrow:hover { background: var(--c-ink); color: var(--c-on-dark); transform: translate(-50%, -50%) scale(1.06); }
+    .cases__arrow:hover { background: var(--c-ink); color: var(--c-on-dark); transform: translate(-50%, -50%); }
   }
-  .cases__arrow:active { transform: translate(-50%, -50%) scale(0.96); }
+  .cases__arrow:active { background: var(--c-ink-soft); color: var(--c-on-dark); }
 
   @media (max-width: 759px) {
     .cases { --w: 84%; --track-h: 330px; }

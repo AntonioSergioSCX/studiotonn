@@ -28,7 +28,6 @@
 
   /* Tipografia */
   --f-sans: "Fustat", system-ui, -apple-system, "Segoe UI", sans-serif;   /* títulos e textos */
-  --f-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; /* rótulos pequenos */
   --f-display: var(--f-sans);
 
   --w-regular: 400;

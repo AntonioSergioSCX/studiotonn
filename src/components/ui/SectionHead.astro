@@ -2,7 +2,7 @@
 import Words from './Words.astro';
 
 interface Props {
-  index: string;
+  index?: string;
   eyebrow: string;
   title: string;
   lead?: string;
@@ -13,8 +13,6 @@ const { index, eyebrow, title, lead, id } = Astro.props;
 
 <header class="sh">
   <p class="sh__eyebrow" data-reveal>
-    <span class="sh__index">{index}</span>
-    <span class="sh__sep" aria-hidden="true">/</span>
     {eyebrow}
   </p>
   <h2 class="sh__title split split--scroll" id={id} data-split>
@@ -37,16 +35,9 @@ const { index, eyebrow, title, lead, id } = Astro.props;
     display: inline-flex;
     gap: 8px;
     align-items: baseline;
-    padding: 6px 12px;
-    border-radius: var(--r-pill);
-    background: var(--c-surface);
-    box-shadow: inset 0 0 0 1px var(--c-line);
-    font-family: var(--f-mono);
-    font-size: 0.75rem;
-    font-weight: var(--w-medium);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--c-ink-soft);
+    font-size: var(--t-sm);
+    font-weight: var(--w-semibold);
+    color: var(--c-green-ink);
   }
   .sh__index { color: var(--c-green-ink); }
   .sh__sep { opacity: 0.4; }
