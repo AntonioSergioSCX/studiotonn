@@ -81,8 +81,10 @@ export const hero = {
   /* Ícones 3D pequenos no meio do título, logo depois da palavra indicada */
   titleIcons: { Sites: '/icons/hero-site', clientes: '/icons/hero-dinheiro' } as Record<string, string>,
   fallbackPhrase: 'o seu negócio',
-  lead: 'Eu desenho e construo o site, o aplicativo ou o sistema do seu negócio, do começo ao fim. Você fala direto com quem faz e recebe preço fechado antes de começar.',
-  cta: 'Quero meu orçamento',
+  lead: 'Seu site no ar em até 1 semana, pronto para aparecer no Google e levar quem visita direto para o seu WhatsApp. Você fala com quem faz e sabe o preço antes de começar.',
+  cta: 'Quero meu orçamento grátis',
+  /* Selo de confiança logo abaixo do botão, ainda na primeira tela */
+  trust: ['14 negócios atendidos', 'Preço fechado', '30 dias de ajustes'],
   /* O fim do título passa uma vez por cada tipo de negócio e para em "o seu negócio." */
   phrases: ['a sua clínica.', 'a sua loja.', 'a sua academia.', 'o seu escritório.', 'o seu produto.'],
 };
@@ -95,9 +97,9 @@ export const marquee = [
 /* ── RESULTADOS ───────────────────────────────────────────── */
 
 export const results = {
-  eyebrow: 'O que muda no seu negócio',
-  title: 'Feito para vender.',
-  lead: 'Site bonito que ninguém encontra não paga a conta. Cada detalhe é pensado para uma coisa: transformar quem visita em cliente.',
+  eyebrow: 'O problema',
+  title: 'Cliente que não te acha vai para o concorrente.',
+  lead: 'Quem procura o que você faz decide em segundos: pelo Google, pelo WhatsApp ou pelo link da sua bio. Um site feito para vender resolve as três frentes.',
   // Imagens em public/images: <nome>.webp (480px) e <nome>@2x.webp (960px)
   items: [
     {
@@ -169,6 +171,8 @@ export const process = {
   eyebrow: 'Como funciona',
   title: 'Simples do primeiro oi ao site no ar.',
   lead: 'Quatro passos, um de cada vez. Você sabe sempre em que ponto o projeto está e o que vem depois.',
+  cta: 'Marcar a conversa de 30 minutos',
+  ctaMessage: 'Oi, Antonio! Quero marcar a conversa de 30 minutos sobre o meu projeto.',
   steps: [
     {
       icon: '/icons/passo-conversa.webp?v=2',
@@ -273,6 +277,10 @@ export const faq = {
   asideCta: 'Pergunte no WhatsApp',
   items: [
     {
+      q: 'Já tenho Instagram. Preciso mesmo de um site?',
+      a: 'O Instagram mostra o seu trabalho para quem já te segue. O site é o que aparece para quem ainda não te conhece e procura no Google, e é o link da bio que leva direto para o orçamento no WhatsApp. Um completa o outro.',
+    },
+    {
       q: 'Preciso entender de tecnologia?',
       a: 'Não. Eu cuido de tudo: domínio, hospedagem, Google e a parte técnica. Você só precisa me contar do seu negócio e aprovar as etapas.',
     },
@@ -287,6 +295,14 @@ export const faq = {
     {
       q: 'O site vai aparecer no Google?',
       a: `Sim. O site já sai preparado para o Google, e eu cadastro o seu negócio no Google Meu Negócio para você aparecer quando alguém da sua região procura pelo que você faz.`,
+    },
+    {
+      q: 'E se eu não gostar do resultado?',
+      a: 'Você aprova cada etapa antes de eu seguir para a próxima, então não tem surpresa no fim. E depois que o site vai ao ar, são 30 dias de ajustes sem custo extra.',
+    },
+    {
+      q: 'O site fica no meu nome?',
+      a: 'Sim. Domínio, código e todos os acessos ficam no seu nome. Se um dia quiser trocar de profissional, leva tudo com você.',
     },
     {
       q: 'Você atende a minha cidade?',
@@ -305,8 +321,8 @@ export const finalCta = {
   kicker: 'Você leu até aqui. Bora?',
   title: 'Vamos colocar o seu negócio *no mapa*.',
   text: `Me chama no WhatsApp e em ${site.responseTime} você tem uma ideia clara de preço e prazo. Sem compromisso.`,
-  cta: 'Chamar no WhatsApp',
-  reassurance: 'Primeira conversa sem custo e preço fechado',
+  cta: 'Receber minha proposta',
+  reassurance: 'Primeira conversa sem custo e proposta em até 2 dias',
 };
 
 export const footer = {

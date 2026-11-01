@@ -4,7 +4,8 @@
  * Cada passo mostra em que ponto do caminho está (segmentos que acendem em verde).
  */
 import Words from './ui/Words.astro';
-import { process } from '../content/site';
+import Button from './ui/Button.astro';
+import { process, whatsappLink } from '../content/site';
 
 const total = process.steps.length;
 ---
@@ -39,11 +40,16 @@ const total = process.steps.length;
         </li>
       ))}
     </ol>
+
+    <div class="process__cta" data-reveal>
+      <Button href={whatsappLink(process.ctaMessage)} icon="whatsapp" external>{process.cta}</Button>
+    </div>
   </div>
 </section>
 
 <style>
   .process { padding-top: 0; }
+  .process__cta { display: flex; justify-content: center; margin-top: clamp(40px, 5vw, 64px); }
 
   .process__head {
     display: flex;

@@ -1,5 +1,6 @@
 ---
 import Button from './ui/Button.astro';
+import Icon from './ui/Icon.astro';
 import CaseCarousel from './CaseCarousel.astro';
 import Words from './ui/Words.astro';
 import { hero, whatsappLink } from '../content/site';
@@ -38,6 +39,9 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
 
       <div class="hero__cta hero-in" style="--d:6">
         <Button href={whatsappLink()} size="lg" icon="whatsapp" external>{hero.cta}</Button>
+        <ul class="hero__trust" role="list">
+          {hero.trust.map((t) => <li><Icon name="check" size={16} />{t}</li>)}
+        </ul>
       </div>
 
       <div class="hero__cases hero-in" style="--d:7"><CaseCarousel /></div>
@@ -197,7 +201,18 @@ const swapIndex = hero.titleLines.reduce((n, line) => n + splitWords(line).lengt
     line-height: 1.55;
     color: var(--c-ink-soft);
   }
-  .hero__cta { margin-top: 36px; }
+  .hero__cta { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 36px; }
+  .hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 20px;
+    font-size: var(--t-sm);
+    font-weight: var(--w-medium);
+    color: var(--c-ink-soft);
+  }
+  .hero__trust li { display: inline-flex; align-items: center; gap: 6px; }
+  .hero__trust :global(svg) { color: var(--c-green-ink); }
   .hero__cases { align-self: stretch; }
 
 </style>
