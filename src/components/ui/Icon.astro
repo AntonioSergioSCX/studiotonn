@@ -1,7 +1,8 @@
 ---
 /**
- * Ícones da biblioteca Phosphor (@phosphor-icons/core), embutidos no HTML na hora do build.
- * Decorativos: aria-hidden. Para um ícone novo, acrescente o nome do arquivo em `files`.
+ * Ícones da biblioteca Phosphor (phosphoricons.com, licença MIT), copiados em src/icons
+ * e embutidos no HTML na hora do build. Decorativos: aria-hidden.
+ * Para um ícone novo: copie o .svg (estilo "regular") para src/icons e acrescente em `files`.
  */
 const files = {
   arrow: 'arrow-right',
@@ -24,7 +25,7 @@ const files = {
   asterisk: 'asterisk',
 } as const;
 
-const svgs = import.meta.glob('/node_modules/@phosphor-icons/core/assets/regular/*.svg', {
+const svgs = import.meta.glob('../../icons/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,
@@ -36,7 +37,7 @@ interface Props {
   class?: string;
 }
 const { name, size = 20, class: className } = Astro.props;
-const raw = svgs[`/node_modules/@phosphor-icons/core/assets/regular/${files[name]}.svg`] ?? '';
+const raw = svgs[`../../icons/${files[name]}.svg`] ?? '';
 const inner = raw.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
 ---
 
