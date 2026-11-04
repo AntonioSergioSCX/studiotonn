@@ -44,16 +44,6 @@ import { services, site, whatsappLink, brl } from '../content/site';
         </li>
       ))}
     </ul>
-
-    <ul class="guarantees" role="list">
-      {services.guarantees.map((g, i) => (
-        <li data-reveal style={`--i:${i}`}>
-          <img class="guarantees__icon" src={g.icon} srcset={`${g.icon} 1x, ${g.icon.replace('.webp', '@2x.webp')} 2x`} alt="" width="64" height="64" loading="lazy" decoding="async" />
-          <strong>{g.title}</strong>
-          <span>{g.text}</span>
-        </li>
-      ))}
-    </ul>
   </div>
 </section>
 
@@ -142,36 +132,4 @@ import { services, site, whatsappLink, brl } from '../content/site';
   }
   .plan__cta:focus-visible { outline: 2px solid var(--c-green); outline-offset: 3px; }
 
-  .guarantees {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 16px;
-    /* garantias são um grupo próprio: mais longe dos planos do que os planos entre si */
-    margin-top: clamp(40px, 5vw, 64px);
-  }
-  @media (min-width: 1100px) { .guarantees { grid-template-columns: repeat(4, 1fr); } }
-  .guarantees li {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 0 8px;
-    font-size: var(--t-sm);
-    line-height: 1.45;
-    text-align: center;
-    color: var(--c-ink-soft);
-  }
-  .guarantees strong { font-size: 1.0625rem; font-weight: var(--w-bold); letter-spacing: var(--ls-title); color: var(--c-ink); }
-  .guarantees__icon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 14px;
-    filter: drop-shadow(0 10px 14px rgb(94 204 66 / 0.25));
-    transition: transform var(--d-slow) var(--ease-spring);
-  }
-  .guarantees li:hover .guarantees__icon { transform: translateY(-4px) rotate(-4deg); }
-  @media (max-width: 639px) {
-    .guarantees li { padding: 0 4px; font-size: var(--t-xs); }
-    .guarantees__icon { width: 52px; height: 52px; }
-  }
 </style>
