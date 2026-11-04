@@ -248,18 +248,24 @@ export const services = {
 /* ── QUEM FAZ ─────────────────────────────────────────────── */
 
 export const about = {
-  eyebrow: 'Quem faz',
-  title: 'Quem desenha é quem constrói.',
+  eyebrow: '',
+  title: 'Quem desenha é quem constrói',
+  lead: 'Conheça quem vai construir cada detalhe do seu projeto.',
   paragraphs: [
-    `Oi, eu sou o ${site.owner}. Há ${site.years} anos crio produtos digitais, de sites para negócios do bairro a apps usados por milhares de pessoas.`,
+    `Oi, eu sou o ${site.owner}. Há ${site.years} anos crio produtos digitais, de sites para negócios do bairro a apps e sistemas de startup usados por milhares de pessoas e grandes marcas.`,
     'Como eu desenho e também programo, nada se perde no caminho: o que você aprova é exatamente o que vai ao ar. E você fala sempre comigo, sem atendente, sem intermediário.',
   ],
+  /* Foto com os selos (Atendimento personalizado, Clientes +14), exportada do Figma. Nome e cargo ficam em texto. */
+  card: '/images/quem-faz',
+  name: 'Antônio Sérgio',
+  role: 'Product Designer & Design Engineer',
   photo: '/images/antonio.webp?v=3', // versão @2x ao lado, para telas retina. Vazio = monograma.
   photoAlt: `${site.owner}, ${site.role} do Studio Tonn`,
   facts: [
-    { value: `${site.years}`, label: 'anos criando produtos digitais' },
-    { value: site.responseTime.replace('até ', ''), label: 'para responder sua mensagem' },
+    { value: `+${site.years}`, label: 'Anos de experiência' },
+    { value: '24h', label: 'para ter sua primeira prévia' },
   ],
+  // Fora do layout novo; guardado para voltar quando houver uma área de depoimentos.
   testimonial: {
     quote: 'Em um mês o site já estava no ar e o telefone parou de tocar só para perguntar preço. Agora o cliente chega decidido.',
     author: 'Allana Santos',
