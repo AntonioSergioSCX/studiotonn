@@ -97,16 +97,16 @@ export const marquee = [
 /* ── RESULTADOS ───────────────────────────────────────────── */
 
 export const results = {
-  eyebrow: 'O problema',
-  title: 'Cliente que não te acha vai para o concorrente.',
+  eyebrow: '',
+  title: 'Cliente que não te acha vai para o concorrente',
   lead: 'Quem procura o que você faz decide em segundos: pelo Google, pelo WhatsApp ou pelo link da sua bio. Um site feito para vender resolve as três frentes.',
-  // Imagens em public/images: <nome>.webp (480px) e <nome>@2x.webp (960px)
+  // Imagens em public/images: <nome>.webp (~400px) e <nome>@2x.webp (~660px), fundo #ecebe7 igual ao do card
   items: [
     {
       id: 'google',
       image: '/images/resultado-google',
       title: 'Te encontram no Google',
-      text: 'Quando alguém da sua cidade procura pelo que você faz, é o seu negócio que aparece.',
+      text: 'Quando alguém da sua cidade procura pelo que você faz, é o seu negócio que aparece primeiro no Google.',
     },
     {
       id: 'whatsapp',
@@ -117,8 +117,8 @@ export const results = {
     {
       id: 'trust',
       image: '/images/resultado-confianca',
-      title: 'Confiam de primeira',
-      text: 'Abre rápido até no 4G e passa profissionalismo. O cliente escolhe você antes de comparar preço.',
+      title: 'Credibilidade para o seu negócio',
+      text: 'Seu site passa profissionalismo e credibilidade para o seu cliente, que escolhe você antes de comparar preço.',
     },
   ],
 };
@@ -167,33 +167,32 @@ export const cases = {
 /* ── COMO FUNCIONA ────────────────────────────────────────── */
 
 export const process = {
-  /* Seção escura com textura de pontos em movimento; cada passo mostra o quanto do caminho já foi feito */
-  eyebrow: 'Como funciona',
-  title: 'Simples do primeiro oi ao site no ar.',
-  lead: 'Quatro passos, um de cada vez. Você sabe sempre em que ponto o projeto está e o que vem depois.',
+  /* Passos lado a lado, ligados por uma linha; ícones em src/icons/passo-<n>.svg */
+  eyebrow: '',
+  title: 'Como funciona',
+  lead: 'O processo é simples do primeiro “oi” ao site completo no ar.',
   cta: 'Marcar a conversa de 30 minutos',
   ctaMessage: 'Oi, Antonio! Quero marcar a conversa de 30 minutos sobre o meu projeto.',
   steps: [
     {
-      icon: '/icons/passo-conversa.webp?v=2',
-      title: 'Conversa de 30 minutos',
-      text: 'Por vídeo ou WhatsApp, como for melhor para você. Você me conta do seu negócio. Sem custo e sem compromisso.',
+      icon: 'passo-1',
+      title: 'Primeira conversa',
+      text: 'Por vídeo ou WhatsApp, você me conta do seu negócio. Sem custo e sem compromisso.',
     },
     {
-      icon: '/icons/passo-proposta.webp?v=2',
+      icon: 'passo-2',
       title: 'Proposta com preço fechado',
       text: 'Em até 2 dias você recebe o que vai ser feito, o prazo e o valor. Sem surpresa no fim.',
     },
     {
-      icon: '/icons/passo-construo.webp?v=2',
-      title: 'Eu desenho e construo',
+      icon: 'passo-3',
+      title: 'Construção do projeto',
       text: 'Você acompanha e aprova cada etapa. O que você vê na tela é exatamente o que vai ao ar.',
     },
     {
-      icon: '/icons/passo-no-ar.webp?v=2',
-      title: 'No ar e no Google',
+      icon: 'passo-4',
+      title: 'Aprovação e publicação',
       text: 'Publico, cadastro no Google e fico 30 dias ajustando o que precisar, sem custo extra.',
-      badge: '30 dias de ajustes inclusos',
     },
   ],
 };
@@ -202,8 +201,8 @@ export const process = {
 // Preços de entrada ("a partir de") guardados em `price`. Para exibir no site, mude `showPrices` para true.
 
 export const services = {
-  eyebrow: 'Serviços',
-  title: 'O que eu construo para você.',
+  eyebrow: '',
+  title: 'O que eu construo para você',
   lead: 'Cada projeto tem um tamanho. Na primeira conversa eu entendo o que você precisa e, em até 2 dias, você recebe uma proposta com preço fechado.',
   showPrices: false,
   pricePrefix: 'a partir de',
@@ -224,7 +223,7 @@ export const services = {
       price: 2700,
       priceNote: 'MVP enxuto. Cresce conforme o tamanho do app.',
       desc: 'Um app no celular dos seus clientes para agendar, comprar ou acompanhar pedidos.',
-      time: 'MVP em ~1 a 3 semanas',
+      time: 'MVP em 1 a 3 semanas',
       features: ['iPhone e Android', 'Pagamentos e notificações', 'Publicação na App Store e Google Play', 'Acompanhamento depois do lançamento'],
       featured: false,
     },
@@ -233,7 +232,7 @@ export const services = {
       price: 2000,
       priceNote: 'MVP enxuto. Cresce conforme o tamanho do sistema.',
       desc: 'Um painel sob medida para organizar agenda, clientes, estoque e financeiro num lugar só.',
-      time: 'MVP em ~2 semanas',
+      time: 'MVP em 2 semanas',
       features: ['Acesso pelo navegador, de onde estiver', 'Feito para o jeito que sua empresa trabalha', 'Acessos separados para a equipe', 'Relatórios para decidir com clareza'],
       featured: false,
     },

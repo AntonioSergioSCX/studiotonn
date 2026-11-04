@@ -3,7 +3,7 @@ import Words from './Words.astro';
 
 interface Props {
   index?: string;
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   lead?: string;
   id?: string;
@@ -12,9 +12,7 @@ const { index, eyebrow, title, lead, id } = Astro.props;
 ---
 
 <header class="sh">
-  <p class="sh__eyebrow" data-reveal>
-    {eyebrow}
-  </p>
+  {eyebrow && <p class="sh__eyebrow" data-reveal>{eyebrow}</p>}
   <h2 class="sh__title split split--scroll" id={id} data-split>
     <Words text={title} />
   </h2>

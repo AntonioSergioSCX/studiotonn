@@ -1,4 +1,7 @@
 ---
+/**
+ * O problema e a solução: três cards cinza, ilustração em cima, linha fina e texto alinhado à esquerda.
+ */
 import SectionHead from './ui/SectionHead.astro';
 import { results } from '../content/site';
 ---
@@ -12,18 +15,20 @@ import { results } from '../content/site';
         <li class:list={['card', `card--${item.id}`]} data-reveal style={`--i:${i}`}>
           <div class="card__art">
             <img
-              src={`${item.image}.webp?v=2`}
-              srcset={`${item.image}.webp?v=2 480w, ${item.image}@2x.webp?v=2 960w`}
-              sizes="(min-width: 860px) 360px, 80vw"
-              width="480"
-              height="270"
+              src={`${item.image}.webp?v=3`}
+              srcset={`${item.image}.webp?v=3 400w, ${item.image}@2x.webp?v=3 660w`}
+              sizes="(min-width: 860px) 400px, 85vw"
+              width="660"
+              height="568"
               alt=""
               loading="lazy"
               decoding="async"
             />
           </div>
-          <h3 class="card__title">{item.title}</h3>
-          <p class="card__text">{item.text}</p>
+          <div class="card__body">
+            <h3 class="card__title">{item.title}</h3>
+            <p class="card__text">{item.text}</p>
+          </div>
         </li>
       ))}
     </ul>
@@ -31,46 +36,42 @@ import { results } from '../content/site';
 </section>
 
 <style>
-  .results__grid {
-    display: grid;
-    gap: 16px;
-  }
+  /* Título desta seção mais leve, como no layout novo */
+  .results :global(.sh__title) { max-width: 20ch; font-weight: var(--w-medium); }
+
+  .results__grid { display: grid; gap: 20px; }
   @media (min-width: 860px) {
-    .results__grid { grid-template-columns: repeat(3, 1fr); }
+    .results__grid { grid-template-columns: repeat(3, 1fr); gap: 24px; }
   }
   .card {
     display: flex;
     flex-direction: column;
-    padding: 12px 12px 28px;
-    border-radius: var(--r-lg);
-    background: var(--c-surface);
-    box-shadow: inset 0 0 0 1px var(--c-line);
-    transition: transform var(--d-med) var(--ease-out), box-shadow var(--d-med) var(--ease-out);
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: inset 0 0 0 1px var(--c-line), var(--shadow-2); }
-  .card__art {
-    position: relative;
-    aspect-ratio: 16 / 9;
-    margin-bottom: 24px;
-    border-radius: calc(var(--r-lg) - 10px);
-    background: var(--c-bg);
+    border-radius: 20px;
+    background: #ecebe7; /* mesmo fundo das ilustrações */
     overflow: hidden;
+    transition: box-shadow var(--d-med) var(--ease-out);
   }
+  @media (hover: hover) {
+    .card:hover { box-shadow: 0 18px 40px -24px rgb(13 15 13 / 0.3); }
+    .card:hover .card__art img { transform: translateY(-6px); }
+  }
+  .card__art { aspect-ratio: 660 / 568; overflow: hidden; }
   .card__art img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     transition: transform var(--d-slow) var(--ease-out);
   }
-  .card:hover .card__art img { transform: translateY(-6px); }
-  .card { text-align: center; }
-  .card__title, .card__text { padding-inline: 14px; }
+  .card__body {
+    flex: 1;
+    padding: 24px 24px 28px;
+    border-top: 1px solid rgb(13 15 13 / 0.08);
+  }
   .card__title {
-    font-size: var(--t-h3);
-    font-weight: var(--w-bold);
-    line-height: 1.1;
+    font-size: clamp(1.25rem, 1.1rem + 0.4vw, 1.5rem);
+    font-weight: var(--w-medium);
+    line-height: 1.2;
     letter-spacing: var(--ls-title);
   }
-  .card__text { margin-top: 10px; color: var(--c-ink-soft); }
-
+  .card__text { margin-top: 12px; font-size: var(--t-md); line-height: 1.55; color: var(--c-ink-soft); }
 </style>

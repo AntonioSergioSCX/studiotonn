@@ -1,41 +1,27 @@
 ---
 /**
- * Como funciona: passos em colunas finas que descem em escada, direto no fundo da página.
- * Cada passo mostra em que ponto do caminho está (segmentos que acendem em verde).
+ * Como funciona: quatro passos lado a lado, cada um com um ícone num círculo branco,
+ * ligados por uma linha fina. No celular viram uma lista com a linha descendo.
  */
-import Words from './ui/Words.astro';
+import SectionHead from './ui/SectionHead.astro';
 import Button from './ui/Button.astro';
 import { process, whatsappLink } from '../content/site';
 
-const total = process.steps.length;
+const svgs = import.meta.glob('../icons/passo-*.svg', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const icon = (name: string) => svgs[`../icons/${name}.svg`] ?? '';
 ---
 
 <section class="section process" id="processo" aria-labelledby="processo-title">
   <div class="container">
-    <header class="process__head">
-      <div>
-        <p class="process__eyebrow" data-reveal>{process.eyebrow}</p>
-        <h2 class="process__title split split--scroll" id="processo-title" data-split>
-          <Words text={process.title} />
-        </h2>
-      </div>
-      <p class="process__lead" data-reveal style="--i:2">{process.lead}</p>
-    </header>
+    <SectionHead eyebrow={process.eyebrow} title={process.title} lead={process.lead} id="processo-title" />
 
     <ol class="steps" role="list" aria-label="Etapas">
       {process.steps.map((step, i) => (
         <li class="step" data-reveal style={`--i:${i}`}>
+          <span class="step__icon" aria-hidden="true" set:html={icon(step.icon)} />
           <div class="step__body">
-            <span class="step__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <h3 class="step__title"><span class="sr-only">Passo {i + 1}: </span>{step.title}</h3>
             <p class="step__text">{step.text}</p>
-            {step.badge && <p class="step__badge">{step.badge}</p>}
-            <div class="step__progress" aria-hidden="true">
-              <span class="step__count">Passo {i + 1}/{total}</span>
-              <span class="step__segs">
-                {Array.from({ length: total }, (_, s) => <i class:list={{ 'is-on': s <= i }} style={`--s:${s}`}></i>)}
-              </span>
-            </div>
           </div>
         </li>
       ))}
@@ -49,94 +35,57 @@ const total = process.steps.length;
 
 <style>
   .process { padding-top: 0; }
+  .process :global(.sh__title) { font-weight: var(--w-medium); }
+
+  .steps { --dot: 64px; display: grid; gap: 28px; }
+  .step { position: relative; display: grid; grid-template-columns: var(--dot) 1fr; gap: 18px; align-items: start; }
+
+  /* Ícone num círculo branco com sombra suave */
+  .step__icon {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: var(--dot);
+    height: var(--dot);
+    border-radius: 50%;
+    background: var(--c-surface);
+    box-shadow: 0 10px 24px -10px rgb(13 15 13 / 0.22), 0 0 0 1px rgb(13 15 13 / 0.04);
+    color: #51b338;
+  }
+  .step__icon :global(svg) { width: 26px; height: 26px; }
+
+  /* Linha entre os passos: desce no celular, corre de lado no computador */
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: calc(var(--dot) / 2 - 1px);
+    top: calc(var(--dot) + 8px);
+    bottom: -20px;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, rgb(13 15 13 / 0.12), rgb(13 15 13 / 0.04));
+  }
+
+  .step__body { padding-top: 6px; }
+  .step__title { font-size: 1.25rem; font-weight: var(--w-medium); letter-spacing: var(--ls-title); line-height: 1.25; }
+  .step__text { margin-top: 8px; font-size: var(--t-md); line-height: 1.55; color: var(--c-ink-soft); }
+
+  @media (min-width: 900px) {
+    .steps { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .step { grid-template-columns: 1fr; justify-items: center; gap: 24px; text-align: center; }
+    .step:not(:last-child)::after {
+      left: calc(50% + var(--dot) / 2 + 28px);
+      right: calc(-50% + var(--dot) / 2 + 28px - 24px);
+      top: calc(var(--dot) / 2 - 1px);
+      bottom: auto;
+      width: auto;
+      height: 2px;
+      background: linear-gradient(90deg, rgb(13 15 13 / 0.04), rgb(13 15 13 / 0.14) 50%, rgb(13 15 13 / 0.04));
+    }
+    .step__body { padding-top: 0; }
+    .step__text { max-width: 30ch; margin-inline: auto; }
+  }
+
   .process__cta { display: flex; justify-content: center; margin-top: clamp(40px, 5vw, 64px); }
-
-  .process__head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 24px 48px;
-    margin-bottom: clamp(40px, 6vw, 80px);
-  }
-  .process__eyebrow {
-    font-size: var(--t-sm);
-    font-weight: var(--w-semibold);
-    color: var(--c-green-ink);
-  }
-  .process__title {
-    max-width: 14ch;
-    margin-top: 18px;
-    font-size: var(--t-h2);
-    font-weight: var(--w-bold);
-    line-height: 1;
-    letter-spacing: var(--ls-display);
-    text-wrap: balance;
-  }
-  .process__lead {
-    max-width: 34ch;
-    padding-left: 16px;
-    border-left: 2px solid var(--c-green);
-    font-size: var(--t-md);
-    line-height: 1.5;
-    color: var(--c-ink-soft);
-  }
-
-  /* Colunas separadas por linhas finas; cada uma começa um pouco mais abaixo */
-  .steps { display: grid; }
-  .step__body { display: flex; flex-direction: column; padding: 28px 0; }
-  .step + .step { border-top: 1px solid var(--c-line); }
-  @media (min-width: 760px) {
-    .steps { grid-template-columns: repeat(2, 1fr); }
-    .step { padding-inline: clamp(16px, 2vw, 28px); }
-    .step + .step { border-top: 0; }
-    .step:nth-child(even) { border-left: 1px solid var(--c-line); }
-    .step:nth-child(even) .step__body { padding-top: 72px; }
-    .step:nth-child(n + 3) { border-top: 1px solid var(--c-line); }
-  }
-  @media (min-width: 1100px) {
-    .steps { grid-template-columns: repeat(4, 1fr); }
-    .step:first-child { padding-left: 0; }
-    .step:last-child { padding-right: 0; }
-    .step + .step,
-    .step:nth-child(n + 3) { border-top: 0; border-left: 1px solid var(--c-line); }
-    .step .step__body,
-    .step:nth-child(even) .step__body { padding-top: calc(var(--i) * clamp(48px, 5vw, 80px)); padding-bottom: 8px; }
-  }
-
-  .step__num {
-    font-size: var(--t-sm);
-    font-weight: var(--w-bold);
-    font-variant-numeric: tabular-nums;
-    color: var(--c-green-ink);
-  }
-  .step__title {
-    margin-top: 14px;
-    font-size: 1.375rem;
-    font-weight: var(--w-bold);
-    letter-spacing: var(--ls-title);
-    line-height: 1.15;
-  }
-  .step__text { margin-top: 10px; max-width: 32ch; font-size: var(--t-sm); line-height: 1.5; color: var(--c-ink-soft); }
-  .step__badge {
-    align-self: flex-start;
-    margin-top: 16px;
-    padding: 5px 12px;
-    border-radius: var(--r-pill);
-    background: var(--c-ink);
-    color: var(--c-on-dark);
-    font-size: var(--t-xs);
-    font-weight: var(--w-bold);
-  }
-
-  /* Segmentos: acendem um a um até o passo atual quando a coluna aparece */
-  .step__progress { margin-top: 24px; }
-  .step__count { font-size: var(--t-xs); font-variant-numeric: tabular-nums; color: var(--c-ink-soft); }
-  .step__segs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 8px; }
-  .step__segs i { height: 4px; border-radius: 4px; background: rgb(13 15 13 / 0.1); transition: background-color 0.4s ease; }
-  .step__segs i.is-on { background: var(--c-green); }
-  @media (prefers-reduced-motion: no-preference) {
-    :global(.js) .step__segs i.is-on { background: rgb(13 15 13 / 0.1); transition-delay: calc(300ms + var(--i) * 120ms + var(--s) * 160ms); }
-    :global(.js) .step:global(.is-in) .step__segs i.is-on { background: var(--c-green); }
-  }
 </style>
