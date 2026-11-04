@@ -100,7 +100,7 @@ export const results = {
   eyebrow: '',
   title: 'Cliente que não te acha vai para o concorrente',
   lead: 'Quem procura o que você faz decide em segundos: pelo Google, pelo WhatsApp ou pelo link da sua bio. Um site feito para vender resolve as três frentes.',
-  // Imagens em public/images: <nome>.webp (~400px) e <nome>@2x.webp (~660px), fundo #ecebe7 igual ao do card
+  // Imagens em public/images: <nome>.webp (1x) e <nome>@2x.webp (2x), fundo #ecebe7 igual ao do card
   items: [
     {
       id: 'google',
