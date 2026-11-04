@@ -81,8 +81,6 @@ export const hero = {
   title: { before: 'Sites', middle: 'que trazem clientes', after: 'para o seu negócio' },
   lead: 'Cada projeto começa pelo que torna seu negócio único e transforma esse diferencial em uma experiência digital pensada.',
   cta: 'Quero meu orçamento',
-  /* Bloco verde abaixo do botão: por enquanto só o vídeo; depois entram site, sistema e app */
-  stage: { video: '/video/hero-nevoa', label: 'Trabalhos recentes' },
 };
 
 export const marquee = [
@@ -119,13 +117,15 @@ export const results = {
   ],
 };
 
-/* ── CASES (carrossel do topo) ───────────────────────────── */
-// Cada case mostra uma imagem real:
-//   `image`   → print do site (public/images/cases/<nome>.webp + <nome>-640.webp), numa janela de navegador
-//   `screens` → telas do app (public/images/cases/<nome>-1.webp…), rolando de lado dentro de celulares
+/* ── PROJETOS ─────────────────────────────────────────────── */
+// Cada projeto mostra só a capa: public/images/cases/<nome>.webp (1240×760) + <nome>-640.webp.
+// `href` vazio = capa sem link; preencha com o endereço do site para abrir em nova aba.
 
 export const cases = {
   label: 'Trabalhos recentes',
+  title: 'Projetos que já estão no ar',
+  lead: 'Alguns dos sites e apps que desenhei e construí.',
+  cursor: 'Ver projeto',
   items: [
     {
       name: 'CompactArq',
@@ -151,7 +151,7 @@ export const cases = {
       name: 'Constância',
       type: 'App de hábitos',
       result: 'Otimização interna',
-      screens: ['/images/cases/constancia-1', '/images/cases/constancia-2', '/images/cases/constancia-3', '/images/cases/constancia-4'],
+      image: '/images/cases/constancia',
       alt: 'Telas do app Constância: progresso em quadradinhos, lista de hábitos e cadastro de novo hábito',
       bg: '#e3e7df',
       color: '#0b0b0b',

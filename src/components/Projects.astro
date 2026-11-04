@@ -1,0 +1,161 @@
+---
+/**
+ * Projetos: capa, nome e tipo. Com número ímpar de projetos o primeiro ocupa a linha toda.
+ * Com mouse, o cursor vira uma pílula "Ver projeto" em cima da capa.
+ * Quando o projeto tem `href`, a capa e o nome abrem o site em nova aba.
+ */
+import SectionHead from './ui/SectionHead.astro';
+import { cases } from '../content/site';
+
+const featured = cases.items.length % 2 === 1;
+---
+
+<section class="section projects" id="trabalhos" aria-labelledby="trabalhos-title">
+  <div class="container">
+    <SectionHead title={cases.title} lead={cases.lead} id="trabalhos-title" />
+
+    <ul class:list={['projects__grid', { 'has-featured': featured }]} role="list">
+      {cases.items.map((c, i) => {
+        const Tag = c.href ? 'a' : 'div';
+        const link = c.href ? { href: c.href, target: '_blank', rel: 'noopener' } : {};
+        return (
+          <li class="work" data-reveal style={`--i:${i % 2}`}>
+            <Tag class="work__cover" data-work-cover style={`--bg:${c.bg}`} {...link} {...(c.href ? { 'aria-label': `${cases.cursor}: ${c.name} (abre em nova aba)` } : {})}>
+              <img
+                src={`${c.image}.webp?v=3`}
+                srcset={`${c.image}-640.webp?v=3 640w, ${c.image}.webp?v=3 1240w`}
+                sizes={featured && i === 0 ? '(min-width: 760px) 1200px, 92vw' : '(min-width: 760px) 600px, 92vw'}
+                alt={c.alt}
+                width="1240"
+                height="760"
+                loading="lazy"
+                decoding="async"
+              />
+            </Tag>
+            <div class="work__meta">
+              <h3 class="work__name">{c.name}</h3>
+              <p class="work__type">{c.type}</p>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+
+  <div class="work-cursor" aria-hidden="true" data-work-cursor><span>{cases.cursor}</span></div>
+</section>
+
+<script>
+  /* Pílula que segue o mouse por cima das capas (só em telas com mouse) */
+  const cursor = document.querySelector<HTMLElement>('[data-work-cursor]');
+  const fine = matchMedia('(hover: hover) and (pointer: fine)');
+  const still = matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (cursor && fine.matches) {
+    let x = 0, y = 0, cx = 0, cy = 0, raf = 0;
+
+    const draw = () => {
+      const k = still.matches ? 1 : 0.22;
+      cx += (x - cx) * k;
+      cy += (y - cy) * k;
+      cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      raf = Math.abs(x - cx) + Math.abs(y - cy) > 0.3 ? requestAnimationFrame(draw) : 0;
+    };
+    const move = (e: PointerEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+      if (!raf) raf = requestAnimationFrame(draw);
+    };
+
+    document.querySelectorAll<HTMLElement>('[data-work-cover]').forEach((cover) => {
+      cover.addEventListener('pointerenter', (e) => {
+        x = cx = e.clientX;
+        y = cy = e.clientY;
+        cursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+        cursor.classList.add('is-on');
+      });
+      cover.addEventListener('pointermove', move);
+      cover.addEventListener('pointerleave', () => cursor.classList.remove('is-on'));
+    });
+    /* rolar a página com o mouse parado tira a capa de baixo do cursor */
+    addEventListener('scroll', () => {
+      if (!cursor.classList.contains('is-on')) return;
+      const el = document.elementFromPoint(x, y);
+      if (!el || !el.closest('[data-work-cover]')) cursor.classList.remove('is-on');
+    }, { passive: true });
+  }
+</script>
+
+<style>
+  .projects :global(.sh__title) { max-width: 20ch; font-weight: var(--w-medium); }
+
+  .projects__grid { display: grid; gap: clamp(32px, 4vw, 48px) 24px; }
+  @media (min-width: 760px) {
+    .projects__grid { grid-template-columns: 1fr 1fr; }
+    .has-featured > .work:first-child { grid-column: 1 / -1; }
+    .has-featured > .work:first-child .work__cover { aspect-ratio: 16 / 8; }
+  }
+
+  .work__cover {
+    display: block;
+    aspect-ratio: 1240 / 760;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--bg, #ecebe7);
+  }
+  .work__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform var(--d-slow) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .work__cover { cursor: none; }
+    .work__cover:hover img { transform: scale(1.03); }
+  }
+  .work__cover:focus-visible { outline: 2px solid var(--c-ink); outline-offset: 4px; }
+
+  .work__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-top: 16px;
+    padding-inline: 4px;
+  }
+  .work__name { font-size: clamp(1.125rem, 1rem + 0.4vw, 1.375rem); font-weight: var(--w-medium); letter-spacing: var(--ls-title); }
+  .work__type { font-size: var(--t-md); color: var(--c-ink-soft); }
+
+  /* Cursor "Ver projeto": o ponto do mouse fica no centro da pílula */
+  .work-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    pointer-events: none;
+  }
+  .work-cursor span {
+    display: block;
+    translate: -50% -50%;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: var(--c-green);
+    color: var(--c-ink);
+    font-size: var(--t-sm, 0.875rem);
+    font-weight: var(--w-medium);
+    white-space: nowrap;
+    box-shadow: 0 10px 30px -12px rgb(13 15 13 / 0.35);
+    opacity: 0;
+    scale: 0.4;
+    transition: opacity 0.2s var(--ease-out), scale 0.35s var(--ease-spring);
+  }
+  .work-cursor.is-on span { opacity: 1; scale: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .work-cursor span { transition: opacity 0.15s linear; scale: 1; }
+  }
+  @media not ((hover: hover) and (pointer: fine)) {
+    .work-cursor { display: none; }
+  }
+</style>

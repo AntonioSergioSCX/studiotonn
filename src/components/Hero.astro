@@ -1,7 +1,7 @@
 ---
 /**
- * Hero: fundo quadriculado, título com ícones que abrem espaço entre as palavras
- * e um bloco verde com vídeo (depois recebe site, sistema e app).
+ * Hero: fundo quadriculado, título com ícones que abrem espaço entre as palavras,
+ * texto e botão. Ocupa a altura da tela, com o conteúdo no centro.
  *
  * Animação (só uma vez, ao abrir a página):
  *  1. a pílula verde depois de "Sites" se abre na horizontal e empurra o resto da linha;
@@ -35,55 +35,30 @@ import { hero, whatsappLink } from '../content/site';
     <div class="hero__cta hero-in" style="--d:4">
       <Button href={whatsappLink()} icon="whatsapp" external>{hero.cta}</Button>
     </div>
-
-    <div class="hero__stage hero-in" style="--d:5" id="trabalhos" aria-label={hero.stage.label} role="region">
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        poster={`${hero.stage.video}-poster.webp`}
-        width="1280"
-        height="532"
-        aria-hidden="true"
-        data-hero-video
-      >
-        <source src={`${hero.stage.video}.webm`} type="video/webm" />
-        <source src={`${hero.stage.video}.mp4`} type="video/mp4" />
-      </video>
-    </div>
   </div>
 </section>
 
-<script>
-  /* O vídeo para quando sai da tela e não roda para quem pediu menos movimento */
-  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
-  if (video) {
-    const still = matchMedia('(prefers-reduced-motion: reduce)');
-    let visible = true;
-    const sync = () => {
-      if (still.matches || !visible || document.hidden) video.pause();
-      else video.play().catch(() => {});
-    };
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(video);
-    document.addEventListener('visibilitychange', sync);
-    still.addEventListener('change', sync);
-    sync();
-  }
-</script>
-
 <style>
-  .hero { position: relative; padding-top: clamp(112px, 12vw, 152px); padding-bottom: clamp(28px, 4vw, 48px); isolation: isolate; }
+  /* Altura da tela; o mesmo respiro em cima (menu) e embaixo deixa o bloco no centro exato */
+  .hero {
+    --head: 84px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 100svh;
+    padding-block: var(--head);
+    isolation: isolate;
+  }
+  .hero__inner { width: 100%; }
 
-  /* Quadriculado do layout: some aos poucos atrás do bloco verde */
+  /* Quadriculado do layout: some aos poucos perto do fim do hero */
   .hero__grid {
     position: absolute;
-    inset: 0 0 30%;
+    inset: 0;
     z-index: -1;
     background: #eeede6 url('/images/hero-grid.svg') center top / 945px 630px repeat;
-    mask-image: linear-gradient(180deg, #000 70%, transparent);
-    -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent);
+    mask-image: linear-gradient(180deg, #000 75%, transparent);
+    -webkit-mask-image: linear-gradient(180deg, #000 75%, transparent);
   }
 
   .hero__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -148,19 +123,4 @@ import { hero, whatsappLink } from '../content/site';
     color: var(--c-ink-soft);
   }
   .hero__cta { margin-top: 30px; }
-
-  /* Bloco verde com o vídeo */
-  .hero__stage {
-    width: min(100%, 980px);
-    margin-top: clamp(40px, 5vw, 64px);
-    border-radius: 24px;
-    overflow: hidden;
-    background: #cfe8a8;
-    box-shadow: 0 30px 60px -36px rgb(45 122 27 / 0.45);
-    aspect-ratio: 16 / 7;
-  }
-  .hero__stage video { display: block; width: 100%; height: 100%; object-fit: cover; }
-  @media (max-width: 759px) {
-    .hero__stage { aspect-ratio: 4 / 3; border-radius: 20px; }
-  }
 </style>
