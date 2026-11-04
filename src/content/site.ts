@@ -77,16 +77,12 @@ export const nav = [
 /* ── HERO ─────────────────────────────────────────────────── */
 
 export const hero = {
-  titleLines: ['Sites que trazem', '*clientes* para'],
-  /* Ícones 3D pequenos no meio do título, logo depois da palavra indicada */
-  titleIcons: { Sites: '/icons/hero-site', clientes: '/icons/hero-dinheiro' } as Record<string, string>,
-  fallbackPhrase: 'o seu negócio',
-  lead: 'Seu site no ar em até 1 semana, pronto para aparecer no Google e levar quem visita direto para o seu WhatsApp. Você fala com quem faz e sabe o preço antes de começar.',
-  cta: 'Quero meu orçamento grátis',
-  /* Selo de confiança logo abaixo do botão, ainda na primeira tela */
-  trust: ['14 negócios atendidos', 'Preço fechado', '30 dias de ajustes'],
-  /* O fim do título passa uma vez por cada tipo de negócio e para em "o seu negócio." */
-  phrases: ['a sua clínica.', 'a sua loja.', 'a sua academia.', 'o seu escritório.', 'o seu produto.'],
+  /* Título em duas linhas; os ícones entram depois das palavras e abrem espaço empurrando o texto */
+  title: { before: 'Sites', middle: 'que trazem clientes', after: 'para o seu negócio' },
+  lead: 'Cada projeto começa pelo que torna seu negócio único e transforma esse diferencial em uma experiência digital pensada.',
+  cta: 'Quero meu orçamento',
+  /* Bloco verde abaixo do botão: por enquanto só o vídeo; depois entram site, sistema e app */
+  stage: { video: '/video/hero-nevoa', label: 'Trabalhos recentes' },
 };
 
 export const marquee = [
