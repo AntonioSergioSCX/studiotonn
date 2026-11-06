@@ -81,6 +81,8 @@ export const hero = {
   title: { before: 'Sites', middle: 'que trazem clientes', after: 'para o seu negócio' },
   lead: 'Cada projeto começa pelo que torna seu negócio único e transforma esse diferencial em uma experiência digital pensada.',
   cta: 'Quero meu orçamento',
+  /* Mural de trabalhos em movimento abaixo do botão (vídeo com versão para celular) */
+  stage: { video: '/video/hero-mural', label: 'Trabalhos recentes' },
 };
 
 export const marquee = [

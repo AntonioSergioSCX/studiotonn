@@ -1,7 +1,7 @@
 ---
 /**
  * Hero: fundo quadriculado, título com ícones que abrem espaço entre as palavras,
- * texto e botão. Ocupa a altura da tela, com o conteúdo no centro.
+ * texto, botão e o mural de trabalhos em vídeo (até 460px de altura, cortado nas bordas).
  *
  * Animação (só uma vez, ao abrir a página):
  *  1. a pílula verde depois de "Sites" se abre na horizontal e empurra o resto da linha;
@@ -35,18 +35,51 @@ import { hero, whatsappLink } from '../content/site';
     <div class="hero__cta hero-in" style="--d:4">
       <Button href={whatsappLink()} icon="whatsapp" external>{hero.cta}</Button>
     </div>
+
+    <div class="hero__stage hero-in" style="--d:5" id="trabalhos" role="region" aria-label={hero.stage.label}>
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={`${hero.stage.video}-poster.webp`}
+        width="1280"
+        height="720"
+        aria-hidden="true"
+        data-hero-video
+      >
+        <source src={`${hero.stage.video}-mobile.webm`} type="video/webm" media="(max-width: 759px)" />
+        <source src={`${hero.stage.video}-mobile.mp4`} type="video/mp4" media="(max-width: 759px)" />
+        <source src={`${hero.stage.video}.webm`} type="video/webm" />
+        <source src={`${hero.stage.video}.mp4`} type="video/mp4" />
+      </video>
+    </div>
   </div>
 </section>
 
+<script>
+  /* O vídeo para quando sai da tela e não roda para quem pediu menos movimento */
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  if (video) {
+    const still = matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = true;
+    const sync = () => {
+      if (still.matches || !visible || document.hidden) video.pause();
+      else video.play().catch(() => {});
+    };
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); }).observe(video);
+    document.addEventListener('visibilitychange', sync);
+    still.addEventListener('change', sync);
+    sync();
+  }
+</script>
+
 <style>
-  /* Altura da tela; o mesmo respiro em cima (menu) e embaixo deixa o bloco no centro exato */
   .hero {
-    --head: 84px;
     position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 100svh;
-    padding-block: var(--head);
+    padding-top: clamp(112px, 12vw, 148px);
+    padding-bottom: clamp(32px, 4vw, 56px);
     isolation: isolate;
   }
   .hero__inner { width: 100%; }
@@ -57,8 +90,8 @@ import { hero, whatsappLink } from '../content/site';
     inset: 0;
     z-index: -1;
     background: #eeede6 url('/images/hero-grid.svg') center top / 945px 630px repeat;
-    mask-image: linear-gradient(180deg, #000 75%, transparent);
-    -webkit-mask-image: linear-gradient(180deg, #000 75%, transparent);
+    mask-image: linear-gradient(180deg, #000 55%, transparent 85%);
+    -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 85%);
   }
 
   .hero__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -123,4 +156,19 @@ import { hero, whatsappLink } from '../content/site';
     color: var(--c-ink-soft);
   }
   .hero__cta { margin-top: 30px; }
+
+  /* Mural em vídeo: no máximo 460px de altura; o que passar é cortado pelas bordas arredondadas */
+  .hero__stage {
+    width: 100%;
+    height: clamp(300px, 42vw, 460px);
+    margin-top: clamp(40px, 5vw, 56px);
+    border-radius: 24px;
+    overflow: hidden;
+    background: #1d1f1d url('/video/hero-mural-poster.webp') center / cover;
+    box-shadow: 0 30px 60px -36px rgb(13 15 13 / 0.45);
+  }
+  .hero__stage video { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 759px) {
+    .hero__stage { height: 360px; border-radius: 20px; background-image: url('/video/hero-mural-mobile-poster.webp'); }
+  }
 </style>
